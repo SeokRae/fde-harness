@@ -35,12 +35,16 @@
 
 ## 코딩 규칙
 
-<!-- 프로젝트에 맞게 수정 -->
+<!--
+프로젝트 스택에 맞게 채워주세요. 사용 중인 한 가지 예시만 남기고 나머지는 삭제.
+이 섹션이 비어있으면 AI 에이전트가 임의로 추측해서 일관성이 깨집니다.
+-->
 
-- **언어**: Python 3.11
-- **포맷터**: ruff (변경 후 자동 실행)
-- **테스트**: pytest, 모든 새 함수는 최소 1개 테스트
-- **커밋 메시지**: `feat(spec-{ID}): {요약}` 형식
+- **언어/런타임**: <!-- 예: Python 3.11 / Node.js 20 + TypeScript 5.x / Java 21 / Go 1.22 / Rust 1.78 -->
+- **포맷터·린터**: <!-- 예: ruff + black / prettier + eslint / spotless + checkstyle / gofmt + golangci-lint / rustfmt + clippy -->
+- **테스트 프레임워크**: <!-- 예: pytest / vitest 또는 jest / JUnit 5 / go test / cargo test — 모든 새 함수는 최소 1개 테스트 -->
+- **빌드·패키지 매니저**: <!-- 예: uv / pnpm / Gradle Wrapper / go modules / cargo -->
+- **커밋 메시지**: `feat(spec-{ID}): {요약}` 형식 (Conventional Commits 권장)
 
 ## 도메인 용어
 
