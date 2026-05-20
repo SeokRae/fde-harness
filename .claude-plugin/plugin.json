@@ -12,5 +12,6 @@
   "keywords": ["fde", "spec-driven", "harness", "methodology", "ai-development"],
   "commands": "./commands/",
   "skills": "./skills/",
+  "hooks": "./hooks/",
   "mcpServers": "./.mcp.json"
 }

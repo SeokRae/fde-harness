@@ -50,6 +50,7 @@ flowchart TB
   - `/fde-plan` — 다음 spec의 구현 계획 보고 (코드 작성 없음)
   - `/fde-done` — 검증 후 완료 처리 및 Ratchet 학습
 - **2 Templates** (`templates/`): spec 템플릿, AGENTS.md 템플릿
+- **1 Hook** (`hooks/post-tool-use.json`): `Edit`/`Write` 직후 사용자 프로젝트의 `./test.sh` 자동 실행 (없으면 no-op)
 - **MCP Servers** (`.mcp.json`): filesystem, git (최소 구성)
 
 ## 설치 방법
@@ -127,6 +128,11 @@ fde-harness/
 ├── templates/
 │   ├── spec-template.md          # 사용자 프로젝트로 복사할 spec 템플릿
 │   └── AGENTS.md                 # 사용자 프로젝트로 복사할 AGENTS 템플릿
+├── hooks/
+│   ├── post-tool-use.json        # PostToolUse hook (./test.sh 자동 실행)
+│   └── README.md                 # hook 형식·비활성화·추가 후보
+├── specs/
+│   └── 001-...md, 002-...md      # 이 레포가 자기 자신에게 적용한 spec 들
 ├── docs/
 │   └── concepts.md               # FDE 방법론 개념도 (Mermaid)
 ├── AGENTS.md                     # 이 레포 자체의 기여자용 지침
@@ -142,7 +148,7 @@ fde-harness/
 |------|----------|
 | AI가 도메인 지식을 잘못 추측 | Ontology 모듈 (skills/ontology-builder/) |
 | 같은 실수를 다른 형태로 반복 | 장기 메모리 시스템 |
-| Done means 체크가 너무 부담 | 자동 Eval harness (hooks/post-tool-use.json) |
+| Plan 페이즈에서 AI가 코드를 만지려 함 | PreToolUse hook (hooks/pre-tool-use.json) — 가드 파일 기반 잠금 |
 | 위험한 명령 시도 | Guardrail hooks (hooks/permission-request.json) |
 | 한 spec이 너무 큰 작업 | Planner/Coder 서브에이전트 분리 (agents/) |
 

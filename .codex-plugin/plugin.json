@@ -8,6 +8,7 @@
   "license": "MIT",
   "keywords": ["fde", "spec-driven", "harness", "methodology"],
   "skills": "./skills/",
+  "hooks": "./hooks/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "FDE Harness",

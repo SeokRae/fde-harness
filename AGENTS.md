@@ -21,6 +21,8 @@
 - 버전 변경 없이 동작이 바뀌는 변경은 하지 않는다 (`plugin.json` 의 `version` 동기 갱신).
 - macOS `.DS_Store` 또는 `.harness/` 결과물을 커밋하지 않는다 (`.gitignore` 참조).
 - 워크플로우 동사(슬래시 커맨드·작업 순서·SKILL.md 단계)를 변경할 때 **4곳을 모두 동기화** — `commands/{verb}.md`, `templates/AGENTS.md` 의 Delta 작업 순서, `skills/fde-workflow/SKILL.md` 의 대응 단계, README의 사용 흐름. 한쪽만 갱신하면 사용자가 보는 곳마다 다른 흐름을 본다.
+- spec 작성 시 Done means 의 "현재 ~를 ~로 갱신" 류 항목 전, `ls`/`grep` 로 **실제 파일 상태를 먼저 확인**한다. 가정 기반 spec 은 Implementation에서 갈리고 검증을 통과해도 산출물이 사용자 기대와 어긋난다 (예: "이미 있는 파일 수정" 인데 파일이 없는 경우).
+- README의 *"다음으로 추가할 만한 것"* 표 항목이 **이번 PR에서 구현되면 즉시 다른 후보로 교체** — 표가 stale 하면 사용자가 "왜 추가 안 됐지" 라고 묻게 된다.
 
 ## 개발 워크플로우
 
