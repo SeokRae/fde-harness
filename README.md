@@ -107,8 +107,11 @@ enabled = true
 
 7. /fde-done 실행
    → Done means 체크리스트 검증, 통과 시 done.log 기록
+   → 일부 실패 시 4가지 분기(implementation-retry/spec-revise/split-spec/reject) 중 결정 → failure-log 기록
    → 실패 경험이 있었다면 AGENTS.md에 Ratchet 규칙 추가
 ```
+
+> 한 사이클 전체 walkthrough, 결정 트리, 로그 포맷 등 상세는 **[docs/cycle-guide.md](docs/cycle-guide.md)** 참조.
 
 ## 폴더 구조
 
@@ -132,9 +135,10 @@ fde-harness/
 │   ├── post-tool-use.json        # PostToolUse hook (./test.sh 자동 실행)
 │   └── README.md                 # hook 형식·비활성화·추가 후보
 ├── specs/
-│   └── 001-...md, 002-...md      # 이 레포가 자기 자신에게 적용한 spec 들
+│   └── 001..003-...md            # 이 레포가 자기 자신에게 적용한 spec 들
 ├── docs/
-│   └── concepts.md               # FDE 방법론 개념도 (Mermaid)
+│   ├── concepts.md               # FDE 방법론 개념도 (Mermaid)
+│   └── cycle-guide.md            # 한 사이클 walkthrough + 결정 트리 + 로그 포맷
 ├── AGENTS.md                     # 이 레포 자체의 기여자용 지침
 ├── LICENSE
 └── README.md
