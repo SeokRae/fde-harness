@@ -30,11 +30,16 @@ flowchart TB
   style Rules fill:#dbeafe,stroke:#3b82f6,stroke-width:2px
 ```
 
-- **Spec** = 각 작업의 계약 (Echo가 쓴다)
-- **AGENTS.md** = 프로젝트 전체에 누적되는 학습 규칙 (Ratchet으로 자란다)
-- 두 문서 위에서 AI 에이전트(Delta)가 일관되게 작동하도록 강제하는 것이 이 플러그인의 전부입니다.
+### 이 다이어그램을 구성하는 4가지 최소 개념
 
-> 두 역할(Echo/Delta), 5단계 사이클 상세, Ratchet 원리, 컴포넌트 매핑, 설계 근거는 **[docs/concepts.md](docs/concepts.md)** 참조.
+1. **Echo / Delta 분리** — 사용자가 Echo(도메인 전문가), AI가 Delta(구현자). 누가 무엇을 아는지를 분리한다.
+2. **Spec = 계약** — Echo가 쓰는 `specs/*.md`. Why · What · Done means · Out of scope 4슬롯.
+3. **승인 게이트** — `/fde-plan` 이 **코드 작성 전 Echo의 명시적 합의** 를 강제한다.
+4. **Ratchet** — 실패 → 한 줄 규칙 → `AGENTS.md`. **한 방향으로만 자란다** (제거 금지).
+
+> 4가지 중 하나라도 빠지면 방법론이 작동하지 않습니다.
+> - 두 역할의 책임 상세 → `/fde-init` 후 생성되는 `AGENTS.md` 의 `## 두 역할` 섹션
+> - 개념도 전체 (5단계 사이클·Ratchet·컴포넌트 매핑·설계 근거) → **[docs/concepts.md](docs/concepts.md)**
 
 ## 포함된 컴포넌트
 
