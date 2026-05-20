@@ -20,6 +20,7 @@
 - `templates/` 내용을 `commands/` 본문에 인라인 복사하지 않는다 — 슬래시 커맨드는 템플릿 경로를 참조만 한다.
 - 버전 변경 없이 동작이 바뀌는 변경은 하지 않는다 (`plugin.json` 의 `version` 동기 갱신).
 - macOS `.DS_Store` 또는 `.harness/` 결과물을 커밋하지 않는다 (`.gitignore` 참조).
+- 워크플로우 동사(슬래시 커맨드·작업 순서·SKILL.md 단계)를 변경할 때 **4곳을 모두 동기화** — `commands/{verb}.md`, `templates/AGENTS.md` 의 Delta 작업 순서, `skills/fde-workflow/SKILL.md` 의 대응 단계, README의 사용 흐름. 한쪽만 갱신하면 사용자가 보는 곳마다 다른 흐름을 본다.
 
 ## 개발 워크플로우
 

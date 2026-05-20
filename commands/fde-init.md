@@ -19,7 +19,8 @@ description: 현재 프로젝트에 FDE 하네스 폴더 구조를 초기화합�
 2. `<플러그인>/templates/spec-template.md` 의 내용을 읽어 `./specs/_template.md` 로 복사 (이미 있으면 덮어쓰지 말 것)
 3. `./AGENTS.md` 가 없으면 `<플러그인>/templates/AGENTS.md` 의 내용으로 생성 (있으면 건드리지 말 것)
 4. `./.harness/done.log` 파일을 빈 파일로 생성 (이미 있으면 건드리지 말 것)
-5. 완료 후 사용자에게 다음을 **순서대로** 안내:
+5. `./.harness/failure-log` 파일을 빈 파일로 생성 (이미 있으면 건드리지 말 것)
+6. 완료 후 사용자에게 다음을 **순서대로** 안내:
    - 생성된 파일 목록 (절대 경로)
    - **⚠️ 가장 먼저**: AGENTS.md의 `## 두 역할 — Echo와 Delta` 섹션을 읽어달라는 안내
      - "당신은 Echo(도메인 전문가) 역할입니다. Spec 작성·Plan 평가·수동 검증·Ratchet 반성 4가지를 직접 책임집니다."
