@@ -63,12 +63,17 @@ stateDiagram-v2
     Approval --> Implementation: 사용자 "진행" 응답
     Approval --> Planning: 사용자 수정 요청
     Implementation --> Verification: /fde-done 실행
-    Verification --> Implementation: 일부 실패<br/>(done 처리 안 함)
-    Verification --> Ratchet: 모두 통과<br/>+ 실패 경험 있음
-    Verification --> Done: 모두 통과<br/>+ 실패 경험 없음
-    Ratchet --> Done
-
+    Verification --> Done: 모두 통과
+    Verification --> Implementation: implementation-retry<br/>(구현 결함)
+    Verification --> Planning: spec-revise<br/>(spec 모호)
+    Verification --> Discovery: split-spec<br/>(새 spec 분리)
+    Verification --> Cancelled: reject<br/>(가치 평가 변경)
+    Done --> Ratchet: 실패 경험 있음
     Done --> [*]: 다음 spec
+    Ratchet --> [*]
+    Cancelled --> [*]
+
+    Cancelled: spec 보관<br/>(done.log 추가 안 함)
 ```
 
 ### 각 단계 책임
