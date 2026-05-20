@@ -37,7 +37,9 @@
 1. `/fde-plan` 으로 다음 spec의 구현 계획을 보고하고 사용자 승인을 기다린다
 2. 승인 후 계획대로만 구현한다 (계획 외 파일을 건드리게 되면 멈추고 계획 갱신)
 3. 모든 변경 후 자동 테스트가 있다면 직접 실행한다
-4. `/fde-done` 으로 검증 후 완료 처리한다
+4. `/fde-done` 으로 검증한다
+   - **모두 통과** → `.harness/done.log` 에 완료 기록 후 Ratchet 단계로
+   - **한 항목이라도 실패** → 4가지 분기(`implementation-retry`·`spec-revise`·`split-spec`·`reject`) 중 하나를 사용자와 합의하고 `.harness/failure-log` 에 결정 기록
 
 ### Delta(너)의 부가 의무 — Echo가 책임을 다하도록 돕기
 
@@ -54,6 +56,7 @@
 - 테스트가 통과하지 않은 상태로 `done` 처리하지 않는다
 - 비밀키, API 키, 비밀번호를 코드나 커밋에 하드코딩하지 않는다
 - `.harness/done.log` 를 수동으로 편집하지 않는다 (`/fde-done`만 사용)
+- `.harness/failure-log` 도 수동 편집하지 않는다 (`/fde-done` 의 실패 분기에서만 기록)
 - <!-- 새 규칙 추가 위치 -->
 
 ## 코딩 규칙

@@ -49,7 +49,17 @@ description: Spec 파일을 코드로 변환하는 FDE 방법론 워크플로우
 Spec의 "Done means" 체크리스트를 한 항목씩 확인한다:
 - 자동 테스트가 정의된 항목은 직접 실행한다
 - 수동 확인 항목은 사용자에게 어떻게 검증할지 명확히 안내한다
-- 하나라도 실패하면 done 처리하지 않는다
+
+**모두 통과한 경우**: `.harness/done.log` 에 완료 기록 후 5단계 Ratchet 으로 진행.
+
+**한 항목이라도 실패한 경우**: 사용자와 다음 4가지 분기 중 하나를 합의한다:
+
+- `implementation-retry` — 구현 결함, 같은 spec 으로 Implementation 재진입
+- `spec-revise` — spec 모호 또는 Done means 부적절, spec 수정 후 `/fde-plan` 재실행
+- `split-spec` — spec 너무 큼, 일부를 별도 spec 으로 분리
+- `reject` — 가치 평가 변경, 작업 중단 (spec 은 보관, done.log 에 추가 안 함)
+
+결정은 `.harness/failure-log` 에 `{ISO 8601 UTC} {Spec ID} {decision}: {요약}` 형식으로 한 줄 기록한다.
 
 ### 5단계: Ratchet (학습 누적)
 
