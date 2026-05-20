@@ -1,0 +1,19 @@
+{
+  "hooks": [
+    {
+      "event": "PostToolUse",
+      "matcher": { "tool": "edit" },
+      "command": "bash -c '[ -x ./test.sh ] && ./test.sh || true'"
+    },
+    {
+      "event": "PostToolUse",
+      "matcher": { "tool": "write" },
+      "command": "bash -c '[ -x ./test.sh ] && ./test.sh || true'"
+    },
+    {
+      "event": "PostToolUse",
+      "matcher": { "tool": "multiedit" },
+      "command": "bash -c '[ -x ./test.sh ] && ./test.sh || true'"
+    }
+  ]
+}

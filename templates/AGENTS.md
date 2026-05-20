@@ -71,6 +71,7 @@
 - **테스트 프레임워크**: <!-- 예: pytest / vitest 또는 jest / JUnit 5 / go test / cargo test — 모든 새 함수는 최소 1개 테스트 -->
 - **빌드·패키지 매니저**: <!-- 예: uv / pnpm / Gradle Wrapper / go modules / cargo -->
 - **커밋 메시지**: `feat(spec-{ID}): {요약}` 형식 (Conventional Commits 권장)
+- **테스트 자동화**: 프로젝트 루트에 실행 가능한 `./test.sh` 를 두면 fde-harness PostToolUse hook이 `Edit`/`Write` 직후 자동 실행 (없으면 no-op). fast-fail 형식 권장 — 자세한 예시는 플러그인 설치 경로의 `hooks/README.md` 참고.
 
 ## 도메인 용어
 
