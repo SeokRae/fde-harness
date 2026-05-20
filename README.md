@@ -8,6 +8,34 @@ Forward Deployed Engineer 방법론을 AI 코딩 에이전트의 작업 흐름�
 - 구현 전 계획 보고와 인간 승인 게이트를 강제합니다
 - 실패 패턴을 `AGENTS.md`의 "절대 하지 말 것" 섹션에 누적시켜 같은 실수를 반복하지 않게 합니다 (Ratchet 원리)
 
+## 개념 한 장 요약
+
+```mermaid
+flowchart TB
+  subgraph Cycle["🔄 5단계 사이클"]
+    Plan["/fde-plan<br/>① Discovery + ② Planning"]
+    Imp[③ Implementation]
+    Done["/fde-done<br/>④ Verification + ⑤ Ratchet"]
+    Plan --> Imp --> Done --> Plan
+  end
+
+  Spec[📄 specs/*.md<br/>Echo가 쓰는 계약]
+  Rules[📜 AGENTS.md<br/>Ratchet으로 자라는 규칙]
+
+  Spec --> Plan
+  Done -. "실패 경험" .-> Rules
+  Rules -. "다음 세션부터 적용" .-> Plan
+
+  style Spec fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+  style Rules fill:#dbeafe,stroke:#3b82f6,stroke-width:2px
+```
+
+- **Spec** = 각 작업의 계약 (Echo가 쓴다)
+- **AGENTS.md** = 프로젝트 전체에 누적되는 학습 규칙 (Ratchet으로 자란다)
+- 두 문서 위에서 AI 에이전트(Delta)가 일관되게 작동하도록 강제하는 것이 이 플러그인의 전부입니다.
+
+> 두 역할(Echo/Delta), 5단계 사이클 상세, Ratchet 원리, 컴포넌트 매핑, 설계 근거는 **[docs/concepts.md](docs/concepts.md)** 참조.
+
 ## 포함된 컴포넌트
 
 - **1 Skill** (`skills/fde-workflow/`): 워크플로우 5단계 (Discovery → Plan → Implement → Verify → Ratchet)
@@ -94,6 +122,8 @@ fde-harness/
 ├── templates/
 │   ├── spec-template.md          # 사용자 프로젝트로 복사할 spec 템플릿
 │   └── AGENTS.md                 # 사용자 프로젝트로 복사할 AGENTS 템플릿
+├── docs/
+│   └── concepts.md               # FDE 방법론 개념도 (Mermaid)
 ├── AGENTS.md                     # 이 레포 자체의 기여자용 지침
 ├── LICENSE
 └── README.md
