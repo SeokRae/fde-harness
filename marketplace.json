@@ -1,0 +1,19 @@
+{
+  "name": "local-fde",
+  "displayName": "Local FDE Marketplace",
+  "description": "FDE 하네스 플러그인을 위한 로컬 마켓플레이스",
+  "plugins": [
+    {
+      "name": "fde-harness",
+      "source": {
+        "path": "."
+      },
+      "interface": {
+        "displayName": "FDE Harness",
+        "shortDescription": "Spec 기반 FDE 개발 워크플로우"
+      },
+      "installPolicy": "AVAILABLE",
+      "authentication": "ON_FIRST_USE"
+    }
+  ]
+}
