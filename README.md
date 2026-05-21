@@ -43,13 +43,17 @@ flowchart TB
 
 ## 포함된 컴포넌트
 
-- **1 Skill** (`skills/fde-workflow/`): 워크플로우 5단계 (Discovery → Plan → Implement → Verify → Ratchet)
-- **4 Slash Commands**:
-  - `/fde-init` — 새 프로젝트에 FDE 폴더 구조 초기화
-  - `/fde-spec <제목>` — 새 spec 파일을 템플릿으로 생성
+- **2 Skills**:
+  - `skills/fde-workflow/` — 워크플로우 5단계 (Discovery → Plan → Implement → Verify → Ratchet)
+  - `skills/discovery-echo/` — 인터뷰·관찰 노트(`notes/*.md`)를 spec 초안(`discovery-drafts/DRAFT-*.md`)으로 옮기는 Discovery 보조 (5가지 최소 규칙으로 동작)
+- **6 Slash Commands**:
+  - `/fde-init` — 새 프로젝트에 FDE 폴더 구조 초기화 (`specs/`, `notes/`, `discovery-drafts/`, `.harness/`)
+  - `/fde-note <제목>` — 새 Discovery 노트를 템플릿으로 생성 (사람만 채움)
+  - `/fde-draft [노트ID]` — 노트를 spec 초안(`discovery-drafts/DRAFT-*.md`)으로 옮김 (discovery-echo 스킬 호출)
+  - `/fde-spec <제목>` — 정식 spec 파일을 템플릿으로 생성
   - `/fde-plan` — 다음 spec의 구현 계획 보고 (코드 작성 없음)
   - `/fde-done` — 검증 후 완료 처리 및 Ratchet 학습
-- **2 Templates** (`templates/`): spec 템플릿, AGENTS.md 템플릿
+- **3 Templates** (`templates/`): spec 템플릿, note 템플릿, AGENTS.md 템플릿
 - **1 Hook** (`hooks/post-tool-use.json`): `Edit`/`Write` 직후 사용자 프로젝트의 `./test.sh` 자동 실행 (없으면 no-op)
 - **MCP Servers** (`.mcp.json`): filesystem, git (최소 구성)
 
@@ -88,9 +92,11 @@ enabled = true
 
 ## 사용 흐름 (양쪽 동일)
 
+### Track A — Spec이 이미 머릿속에 있는 경우
+
 ```
 1. 프로젝트 루트에서 /fde-init 실행
-   → specs/, .harness/, AGENTS.md 생성
+   → specs/, notes/, discovery-drafts/, .harness/, AGENTS.md 생성
 
 2. AGENTS.md를 프로젝트 도메인에 맞게 수정 (도메인 용어, 코딩 규칙 등)
 
@@ -111,6 +117,28 @@ enabled = true
    → 실패 경험이 있었다면 AGENTS.md에 Ratchet 규칙 추가
 ```
 
+### Track B — Discovery부터 시작 (인터뷰·관찰 노트 기반)
+
+```
+1. /fde-init  (Track A 와 동일)
+
+2. /fde-note 첫-고객-인터뷰
+   → notes/001-첫-고객-인터뷰.md 빈 양식 생성
+
+3. 인터뷰 진행 → 사람이 직접 노트 작성 (AI는 읽기만)
+
+4. /fde-draft
+   → discovery-echo 스킬이 notes/001 → discovery-drafts/DRAFT-001-*.md 초안 생성
+   → 모든 줄에 (notes/...) 출처 인용, 빈 슬롯은 Open questions 로 외화
+
+5. 사람이 DRAFT 검토 → 만족스러우면 본문을 specs/001-*.md 로 직접 이동
+   (AI는 specs/ 폴더에 쓰지 않음 — 사람의 승인 경계)
+
+6. 이후 Track A 의 5~7 단계와 동일 (/fde-plan → 구현 → /fde-done)
+```
+
+> Discovery 트랙은 **5가지 최소 규칙**으로 AI 추론을 강하게 제약합니다 (노트에 있는 것만 사용 / 모든 줄에 출처 / Why 는 명시된 가치만 / 빈 자리는 Open questions / 정식 spec 폴더와 물리적 분리). 상세는 `skills/discovery-echo/SKILL.md` 참조.
+
 > 한 사이클 전체 walkthrough, 결정 트리, 로그 포맷 등 상세는 **[docs/cycle-guide.md](docs/cycle-guide.md)** 참조.
 
 ## 폴더 구조
@@ -122,14 +150,18 @@ fde-harness/
 ├── .mcp.json                     # MCP 서버 설정
 ├── marketplace.json              # 로컬 마켓플레이스 정의
 ├── skills/
-│   └── fde-workflow/SKILL.md     # 공유 Agent Skill (양쪽 표준)
+│   ├── fde-workflow/SKILL.md     # 공유 Agent Skill (양쪽 표준)
+│   └── discovery-echo/SKILL.md   # Discovery 보조 — 노트 → spec 초안 (5가지 최소 규칙)
 ├── commands/                     # Claude Code 슬래시 커맨드
 │   ├── fde-init.md
+│   ├── fde-note.md
+│   ├── fde-draft.md
 │   ├── fde-spec.md
 │   ├── fde-plan.md
 │   └── fde-done.md
 ├── templates/
 │   ├── spec-template.md          # 사용자 프로젝트로 복사할 spec 템플릿
+│   ├── note-template.md          # Discovery 노트 템플릿 (사람만 채움)
 │   └── AGENTS.md                 # 사용자 프로젝트로 복사할 AGENTS 템플릿
 ├── hooks/
 │   ├── post-tool-use.json        # PostToolUse hook (./test.sh 자동 실행)
