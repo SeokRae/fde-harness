@@ -25,6 +25,7 @@
 - README의 *"다음으로 추가할 만한 것"* 표 항목이 **이번 PR에서 구현되면 즉시 다른 후보로 교체** — 표가 stale 하면 사용자가 "왜 추가 안 됐지" 라고 묻게 된다.
 - 사이클 흐름(단계 정의·결정 트리·로그 포맷)의 **SSoT 는 `docs/cycle-guide.md`** — 다른 문서(README, `docs/concepts.md`, `commands/`, `templates/`, `skills/`)는 cycle-guide 로 **링크만 한다**. 내용을 복사하면 사이클이 진화할 때 한쪽이 stale 해진다.
 - 새 컴포넌트(`skills/*`, `commands/*`, `hooks/*`, `templates/*`) 추가는 `specs/{ID}-*.md` 선행이 원칙이다 — spec 없이 머지된 경우 **다음 사이클에서 사후 회고 spec 으로 반드시 보강**한다. 회고 누적이 2건을 넘으면 PreToolUse hook 으로 spec 선행을 hard guard 화한다. (메타-FDE 자기일관성 — PR #18 회고)
+- `./test.sh` 의 검증 항목 수는 단방향으로만 증가한다 — 마찰을 이유로 항목을 제거하지 않는다 (Ratchet 일관성). 컴포넌트 개수 상수(`EXPECTED_COMMANDS`, `EXPECTED_SKILLS`) 는 README 의 "포함된 컴포넌트" 표 갱신과 같은 commit 에서 갱신한다.
 
 ## 개발 워크플로우
 

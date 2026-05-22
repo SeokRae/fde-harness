@@ -54,7 +54,7 @@ flowchart TB
   - `/fde-plan` — 다음 spec의 구현 계획 보고 (코드 작성 없음)
   - `/fde-done` — 검증 후 완료 처리 및 Ratchet 학습
 - **3 Templates** (`templates/`): spec 템플릿, note 템플릿, AGENTS.md 템플릿
-- **1 Hook** (`hooks/post-tool-use.json`): `Edit`/`Write` 직후 사용자 프로젝트의 `./test.sh` 자동 실행 (없으면 no-op)
+- **1 Hook** (`hooks/post-tool-use.json`): `Edit`/`Write` 직후 사용자 프로젝트의 `./test.sh` 자동 실행 (없으면 no-op). **이 레포 자체도 `./test.sh` 를 갖고 있어 fde-harness 의 PostToolUse hook 을 dogfood 한다** (검증 항목은 `test.sh` 참조).
 - **MCP Servers** (`.mcp.json`): filesystem, git (최소 구성)
 
 ## 설치 방법
