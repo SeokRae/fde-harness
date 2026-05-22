@@ -91,7 +91,7 @@
 |------|------------|--------|---------------------|
 | **스플릿** | ❌ 미지원 | 며칠 ~ 2주 | (자산 없음 — 사용 시 본 도구의 등급 평가 왜곡 가능) |
 | **딥다이브** | ✅ 지원 (default) | 1 ~ 3개월 | spec → plan → impl → done 사이클. Ratchet 누적 |
-| **챔피언** | 🟡 부분 (graduation 만) | 6개월 ~ 1년+ | `/fde-graduate` 로 후임자 transfer. 월간 리뷰는 미지원 |
+| **챔피언** | 🟢 거의 완전 (graduation + 월간 리뷰) | 6개월 ~ 1년+ | `/fde-graduate` 로 후임자 transfer + `/fde-monthly-review` 로 월간 리듬. `fde-champion-workflow` 스킬 자동 트리거 |
 
 **모드 전환 시**: 모드가 바뀌면 *새 spec* 으로 트리거 (`specs/{ID}-mode-shift-{from}-to-{to}.md`). 모드 변경의 *근거* 가 spec 안에 기록되어야 함.
 

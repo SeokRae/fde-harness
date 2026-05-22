@@ -1,7 +1,7 @@
 {
   "name": "fde-harness",
-  "version": "0.3.0",
-  "description": "FDE(Forward Deployed Engineer) 실천 일부를 차용한 AI 코딩 에이전트 하네스 — 현재 등급 FDE-inspired (2-차원 평가). 지원 모드: 딥다이브 ✅, 챔피언 🟡 부분, 스플릿 ❌. 자기평가 docs/fde-self-evaluation.md 참조.",
+  "version": "0.4.0",
+  "description": "FDE(Forward Deployed Engineer) 실천 일부를 차용한 AI 코딩 에이전트 하네스 — 현재 등급 FDE-inspired (2-차원 평가). 지원 모드: 딥다이브 ✅, 챔피언 🟢 거의 완전, 스플릿 ❌. 자기평가 docs/fde-self-evaluation.md 참조.",
   "author": {
     "name": "SeokRae",
     "email": "kslbsh@gmail.com"
