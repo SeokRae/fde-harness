@@ -1,7 +1,7 @@
 {
   "name": "fde-harness",
-  "version": "0.2.1",
-  "description": "FDE(Forward Deployed Engineer) 실천 일부를 차용한 AI 코딩 에이전트 하네스 — 현재 등급 FDE-inspired (자기평가 docs/fde-self-evaluation.md 참조).",
+  "version": "0.3.0",
+  "description": "FDE(Forward Deployed Engineer) 실천 일부를 차용한 AI 코딩 에이전트 하네스 — 현재 등급 FDE-inspired (2-차원 평가). 지원 모드: 딥다이브 ✅, 챔피언 🟡 부분, 스플릿 ❌. 자기평가 docs/fde-self-evaluation.md 참조.",
   "author": "SeokRae",
   "homepage": "https://github.com/SeokRae/fde-harness",
   "repository": "https://github.com/SeokRae/fde-harness",
@@ -12,8 +12,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "FDE Harness",
-    "shortDescription": "FDE-inspired Spec-Driven 코딩 하네스",
-    "longDescription": "Echo(Operator)·Delta(Engineer)·AI 의 3-Actor 협력 사이클을 강제하는 spec-driven 하네스입니다. FDE 5가지 forcing function 중 일부를 진척시켰으며, 현재 등급은 FDE-inspired 입니다 (docs/fde-criteria.md 기준, docs/fde-self-evaluation.md 자기평가 참조).",
+    "shortDescription": "FDE-inspired 딥다이브 모드 코딩 하네스 (챔피언 부분)",
+    "longDescription": "Echo(Operator)·Delta(Engineer)·AI 의 3-Actor 협력 사이클을 강제하는 spec-driven 하네스입니다. FDE 의 3 모드 (스플릿·딥다이브·챔피언) 중 딥다이브 모드를 기본 지원, 챔피언 모드 graduation 부분 지원. 5가지 forcing function 중 일부 진척. 현재 등급은 FDE-inspired (2-차원 평가) — docs/fde-criteria.md 기준, docs/fde-self-evaluation.md 자기평가 참조.",
     "developerName": "SeokRae",
     "category": "workflow",
     "capabilities": ["spec-driven", "context-management", "ratchet-principle"],

@@ -49,6 +49,32 @@
 - **AI 가 할 수 *있는* 것**: Delta 의 인지 부하 흡수 (해석 제안·코드 초안·반복 검증)
 - **AI 가 할 수 *없는* 것**: Echo 의 자리에 앉는 모든 행위 (가치 판단 · 우선순위 · 도메인 권위 · spec 의 본문 *생성*)
 
+### 1.4 도구의 작동 모드 — 3 사이클 패턴
+
+FDE 는 *기간* 에 따라 3가지 사이클 패턴이 있다 (Palantir 실천에서 관찰된 패턴 — 공식 명명은 아님). 각 모드는 같은 5가지 forcing function 을 *다른 강도* 로 강제한다.
+
+| 모드 | 기간 | 핵심 성격 | F# 강도 프로파일 |
+|------|------|----------|------------------|
+| **스플릿 (Split)** | 며칠 ~ 2주 | 한 워크플로 한 조각, 매일 옆에. throwaway prototype 허용 | F1·F2·F3 최대, F4·F5 약 |
+| **딥다이브 (Deep dive)** | 1 ~ 3개월 | 여러 워크플로 큐, 구조화된 사이클. 누적 학습 | 균형 (모든 F# 중간) |
+| **챔피언 (Champion)** | 6개월 ~ 1년+ | 도메인 SME 됨, 멘토 transfer. graduation 준비 | F4·F5 최대, F1·F2·F3 약 |
+
+**모드 전환 트리거**:
+- 스플릿 → 딥다이브: 첫 demo 가 *진짜 통한다* 가 확인되어 더 깊이 가야 할 때
+- 딥다이브 → 챔피언: 도구가 핵심 인프라가 되어 *고객측 champion* 을 형성해야 할 때
+- 챔피언 → 종료: 고객측이 *자체 유지 가능* 해진 시점
+
+**도구의 "모드 지원" 의미** (§ 5.2 의 모드 커버리지 입력):
+- 해당 모드에 필요한 *최소 자산* (spec template · 사이클 의식 · transfer 메커니즘 등) 을 *어떤 형식이든* 제공
+- 단순 *언급* 만으로는 충족 안 됨 — 자산 1개 이상 필요
+
+**fde-harness 의 현재 모드 지원** (§ 5.2 평가용):
+- 스플릿: ❌ (자산 없음)
+- 딥다이브: ✅ (현재 기본 모드, 모든 사이클 자산)
+- 챔피언: 🟡 부분 (`/fde-graduate` + `templates/graduation-template.md` — spec 009 부터)
+
+→ 현재 모드 커버리지: **약 1.5/3** (딥다이브 ✓ + 챔피언 부분 0.5)
+
 ---
 
 ## 2. 5가지 Forcing Function — FDE 개념 코어
@@ -193,29 +219,45 @@ FDE 의 사이클은 SDD 의 `spec → impl → test` 가 아니라 **`가설 �
 
 ---
 
-## 5. fde-harness 의 명명 정직성 — 3-Tier 등급
+## 5. fde-harness 의 명명 정직성 — 2-차원 등급
 
 ### 5.1 핵심 용어 정의
 
 - **강제**: F1-F5 각각의 § 2 의 "본 도구가 강제해야 하는 것" bullet 의 *충족*
 - **깊은 진척**: 해당 F# 의 **모든** bullet 충족
 - **얕은 진척**: 해당 F# 의 **일부** bullet 충족 (1개 이상)
+- **모드 커버리지** (§ 1.4): 도구가 지원하는 모드 수 / 3
+  - 모드 자산이 *완전 부재* 면 0/3, 부분 자산은 *0.5* 로 계산 가능
+  - **1/3**: 한 모드만 지원 / **2/3**: 두 모드 / **3/3**: 세 모드
 
-### 5.2 3-Tier 명명 등급
+### 5.2 2-차원 등급 매트릭스
 
-fde-harness 의 README·플러그인 description 등에 사용 가능한 명명은 다음 *등급* 으로 정해진다 — 자기 평가 결과에 따라 자동 선택:
+fde-harness 의 README·플러그인 description 등에 사용 가능한 명명은 *F# 강도 (가로) × 모드 커버리지 (세로)* 두 차원으로 결정된다:
 
-| 등급 | 조건 | 사용 가능 명명 |
-|------|------|---------------|
-| **FDE (proper)** | F1-F5 중 *깊은 진척* **3개 이상** + § 5.3 의 공통 조건 | "FDE harness", "FDE methodology 구현" |
-| **FDE-inspired** | 강제(얕은+깊은 합산) **2개 이상**, 위 미달 | "FDE-inspired SDD harness", "FDE 실천 일부를 차용한 ..." |
-| **이름에서 FDE 제외** | 강제 1개 이하 | "AI coding harness" 류 일반명 (구체 명명은 해당 시점 결정) |
+|                              | F# 강제 0~1       | F# 강제 2+ (얕은+깊은 합산)  | F# 깊은 진척 ≥ 3        |
+|------------------------------|-------------------|-----------------------------|--------------------------|
+| **모드 < 1.0 지원**          | 이름에서 FDE 제외 | FDE-inspired                | FDE proper (single-mode) |
+| **모드 1.5~2.5 부분 지원**   | 이름에서 FDE 제외 | FDE-inspired (multi-mode)   | FDE proper               |
+| **모드 3/3 완전 지원**       | 이름에서 FDE 제외 | FDE proper (limited)        | **FDE complete** ⭐       |
+
+**4 단계 (높음 → 낮음)**:
+1. **FDE complete** — 세 모드 모두 + F# 깊은 진척 3개+. *진짜 FDE methodology 구현*
+2. **FDE proper** — F# 깊은 진척 3개+ (단일 모드 OK). *방법론 한 측면 정착*
+3. **FDE-inspired** — F# 강제 2개+. *실천 차용*
+4. **이름에서 FDE 제외** — F# 강제 ≤ 1. *FDE 라고 부를 정직성 부재*
+
+**사용 가능 명명**:
+- **FDE complete**: "complete FDE harness", "FDE methodology 의 모든 모드 지원"
+- **FDE proper**: "FDE harness", "FDE methodology 구현 — 단일 모드 (딥다이브 등)"
+- **FDE-inspired**: "FDE-inspired SDD harness", "FDE 실천 일부를 차용한 ..."
+- **이름에서 FDE 제외**: "AI coding harness" 류 일반명
 
 ### 5.3 공통 조건 (모든 FDE 명명 등급의 필수)
 
 - [ ] 3-Actor Model (§ 1) 의 책임 분리 정의가 도구 안에서 *명시* 됨
 - [ ] 가치 사이클 (§ 3) 의 *측정* 단계가 도구 안에서 추적 가능 (Done means ≠ 가치 검증임이 명시)
 - [ ] 본 문서가 README 에서 명시적으로 링크됨
+- [ ] **도구가 지원하는 모드 (§ 1.4) 가 README·매니페스트에서 *명시*** ← spec 009 신규
 
 ### 5.4 정직성 원칙
 
@@ -268,9 +310,10 @@ fde-harness 의 README·플러그인 description 등에 사용 가능한 명명�
 - **Echo 의 정체성 검증**: 도구는 *지금 입력하는 사람이 진짜 Operator 인지* 모른다. Engineer 의 자기-서명·외부 ID 연동 등은 본 문서 범위 밖
 - **AI 의 권한 한계**: AI 가 Operator 발화를 *해석* 하는 순간 F1·F4 가 흔들린다. "모든 AI 출력이 Engineer 의 *재서명* 을 거쳐야 한다" 는 원칙의 강제 강도는 미결정
 
-### 7.2 결정된 항목 (이전 미해결 → 결정 — spec 007)
+### 7.2 결정된 항목 (이전 미해결 → 결정)
 
-- **F2 의 weekly fallback 거부**: 본업이 따로 있는 1인 메이커의 사용 패턴이 weekly 인 경우 — **weekly fallback 은 FDE 가 아니다**. fde-harness 가 weekly 사용 패턴이면 § 5 의 F2 강제 인정 불가. weekly 사용 자체는 막지 않으나, 정직성을 위해 *등급 한정* (FDE-inspired 이하) 필요.
+- **F2 의 weekly fallback 거부 (spec 007)**: 본업이 따로 있는 1인 메이커의 사용 패턴이 weekly 인 경우 — **weekly fallback 은 FDE 가 아니다**. fde-harness 가 weekly 사용 패턴이면 § 5 의 F2 강제 인정 불가. weekly 사용 자체는 막지 않으나, 정직성을 위해 *등급 한정* (FDE-inspired 이하) 필요.
+- **본 도구의 기본 모드 = 딥다이브 (spec 009)**: fde-harness 는 *딥다이브 모드* 만 *기본 지원*. *스플릿 모드는 미지원* (자산 없음, 자산 추가 시 별도 spec). *챔피언 모드는 부분 지원* (graduation 자산 1개 — `/fde-graduate` + `templates/graduation-template.md` 부터). 다른 모드의 추가 자산 (예: `/fde-sprint`, `/fde-monthly-review`) 은 별도 spec 사이클의 대상.
 
 ### 7.3 미해결 — 데이터·사용 누적 후 결정
 

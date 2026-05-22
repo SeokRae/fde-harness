@@ -10,7 +10,7 @@
       },
       "interface": {
         "displayName": "FDE Harness",
-        "shortDescription": "FDE-inspired Spec-Driven 코딩 하네스"
+        "shortDescription": "FDE-inspired 딥다이브 모드 코딩 하네스 (챔피언 부분)"
       },
       "installPolicy": "AVAILABLE",
       "authentication": "ON_FIRST_USE"

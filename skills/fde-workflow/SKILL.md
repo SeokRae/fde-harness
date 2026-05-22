@@ -75,9 +75,12 @@ Spec의 "Done means" 체크리스트를 한 항목씩 확인한다:
 ## 사용 가능한 슬래시 커맨드
 
 - `/fde-init` — 새 프로젝트에 FDE 하네스 구조를 만든다
-- `/fde-spec` — 새 spec 파일을 템플릿으로 생성한다
+- `/fde-note <제목>` — Discovery 트랙. 새 인터뷰·관찰 노트 양식을 생성한다 (사람만 채움)
+- `/fde-draft [노트ID]` — Discovery 트랙. 노트를 spec 초안(`discovery-drafts/DRAFT-*.md`)으로 옮긴다 (discovery-echo 스킬 호출)
+- `/fde-spec <제목>` — 정식 spec 파일을 템플릿으로 생성한다
 - `/fde-plan` — 현재 진행 중인 spec의 계획을 다시 보여준다
 - `/fde-done` — 현재 spec을 완료 처리한다 (검증 후)
+- `/fde-graduate <champion>` — 챔피언 모드의 transfer. Engineer → 고객측 champion 인수 양식 생성
 
 ## 트리거 키워드
 

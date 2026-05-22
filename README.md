@@ -2,7 +2,14 @@
 
 Forward Deployed Engineer 실천 일부를 차용한 AI 코딩 에이전트 하네스 플러그인입니다. **Claude Code와 OpenAI Codex 양쪽에서 동일하게 작동**합니다.
 
-> **현재 등급: FDE-inspired** — 헌장 [`docs/fde-criteria.md`](docs/fde-criteria.md) 의 3-Tier 명명 체계 기준. 자기평가 결과·등급 결정 근거·강화 후보는 [`docs/fde-self-evaluation.md`](docs/fde-self-evaluation.md) 참조.
+> **현재 등급: FDE-inspired** (2-차원 평가) — 헌장 [`docs/fde-criteria.md`](docs/fde-criteria.md) § 5.2 기준.
+>
+> **지원 모드** (헌장 § 1.4 의 3 모드 중):
+> - 딥다이브 (1~3개월 사이클) ✅ 기본
+> - 챔피언 (6개월+ 사이클) 🟡 부분 (graduation 만 — `/fde-graduate`)
+> - 스플릿 (며칠~2주 사이클) ❌ 미지원
+>
+> 자기평가 결과·등급 결정 근거·강화 후보는 [`docs/fde-self-evaluation.md`](docs/fde-self-evaluation.md) 참조.
 
 ## 무엇을 하는가
 
@@ -48,14 +55,15 @@ flowchart TB
 - **2 Skills**:
   - `skills/fde-workflow/` — 워크플로우 5단계 (Discovery → Plan → Implement → Verify → Ratchet)
   - `skills/discovery-echo/` — 인터뷰·관찰 노트(`notes/*.md`)를 spec 초안(`discovery-drafts/DRAFT-*.md`)으로 옮기는 Discovery 보조 (5가지 최소 규칙으로 동작)
-- **6 Slash Commands**:
+- **7 Slash Commands**:
   - `/fde-init` — 새 프로젝트에 FDE 폴더 구조 초기화 (`specs/`, `notes/`, `discovery-drafts/`, `.harness/`)
   - `/fde-note <제목>` — 새 Discovery 노트를 템플릿으로 생성 (사람만 채움)
   - `/fde-draft [노트ID]` — 노트를 spec 초안(`discovery-drafts/DRAFT-*.md`)으로 옮김 (discovery-echo 스킬 호출)
   - `/fde-spec <제목>` — 정식 spec 파일을 템플릿으로 생성
   - `/fde-plan` — 다음 spec의 구현 계획 보고 (코드 작성 없음)
   - `/fde-done` — 검증 후 완료 처리 및 Ratchet 학습
-- **3 Templates** (`templates/`): spec 템플릿, note 템플릿, AGENTS.md 템플릿
+  - `/fde-graduate <champion>` — 챔피언 모드 transfer (Long-term 사용 후 고객측 champion 인수)
+- **4 Templates** (`templates/`): spec 템플릿, note 템플릿, AGENTS.md 템플릿, graduation 템플릿
 - **1 Hook** (`hooks/post-tool-use.json`): `Edit`/`Write` 직후 사용자 프로젝트의 `./test.sh` 자동 실행 (없으면 no-op). **이 레포 자체도 `./test.sh` 를 갖고 있어 fde-harness 의 PostToolUse hook 을 dogfood 한다** (검증 항목은 `test.sh` 참조).
 - **MCP Servers** (`.mcp.json`): filesystem, git (최소 구성)
 
