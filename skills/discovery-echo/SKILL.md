@@ -91,7 +91,7 @@ description: FDE 딥다이브 모드의 *Discovery 단계* 보조 — 인터뷰�
 - "/fde-note", "/fde-draft"
 - "notes/ 폴더"
 
-**모드 한정**: 스플릿 모드 (며칠~2주) 에서는 *옆에서 매일 관찰* 이 노트 작성보다 우선 → 본 스킬 보조 역할 약화. 챔피언 모드 (6개월+) 에서는 *후임자 transfer* 로 Discovery 의 의미 전환 → `/fde-graduate` 가 우선.
+**모드 한정**: 스플릿 모드 (며칠~2주) 에서는 *옆에서 매일 관찰* 이 노트 작성보다 우선 → 본 스킬 보조 역할 약화. 챔피언 모드 (6개월+) 에서는 *후임자 transfer* 로 Discovery 의 의미 전환 → [`fde-champion-workflow`](../fde-champion-workflow/SKILL.md) 활성.
 
 ## 관련 헌장 섹션
 

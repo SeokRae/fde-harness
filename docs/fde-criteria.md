@@ -70,10 +70,10 @@ FDE 는 *기간* 에 따라 3가지 사이클 패턴이 있다 (Palantir 실천�
 
 **fde-harness 의 현재 모드 지원** (§ 5.2 평가용):
 - 스플릿: ❌ (자산 없음)
-- 딥다이브: ✅ (현재 기본 모드, 모든 사이클 자산)
-- 챔피언: 🟡 부분 (`/fde-graduate` + `templates/graduation-template.md` — spec 009 부터)
+- 딥다이브: ✅ (기본 모드, 모든 사이클 자산)
+- 챔피언: 🟢 거의 완전 (spec 011 부터: `skills/fde-champion-workflow` + `/fde-graduate` + `/fde-monthly-review` + 2 templates)
 
-→ 현재 모드 커버리지: **약 1.5/3** (딥다이브 ✓ + 챔피언 부분 0.5)
+→ 현재 모드 커버리지: **약 1.85/3** (딥다이브 ✓ + 챔피언 거의 완전 0.85)
 
 ---
 
