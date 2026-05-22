@@ -1,7 +1,7 @@
 {
   "name": "fde-harness",
-  "version": "0.2.0",
-  "description": "FDE(Forward Deployed Engineer) 방법론을 AI 코딩 에이전트의 작업 흐름으로 구현한 최소 하네스.",
+  "version": "0.2.1",
+  "description": "FDE(Forward Deployed Engineer) 실천 일부를 차용한 AI 코딩 에이전트 하네스 — 현재 등급 FDE-inspired (자기평가 docs/fde-self-evaluation.md 참조).",
   "author": "SeokRae",
   "homepage": "https://github.com/SeokRae/fde-harness",
   "repository": "https://github.com/SeokRae/fde-harness",
@@ -12,8 +12,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "FDE Harness",
-    "shortDescription": "Spec 기반 FDE 개발 워크플로우",
-    "longDescription": "고객 현장 컨텍스트를 Spec으로 캡처하고, AI 에이전트가 Spec을 코드로 변환하며, 실패 패턴을 AGENTS.md에 누적시키는 최소 FDE 하네스입니다.",
+    "shortDescription": "FDE-inspired Spec-Driven 코딩 하네스",
+    "longDescription": "Echo(Operator)·Delta(Engineer)·AI 의 3-Actor 협력 사이클을 강제하는 spec-driven 하네스입니다. FDE 5가지 forcing function 중 일부를 진척시켰으며, 현재 등급은 FDE-inspired 입니다 (docs/fde-criteria.md 기준, docs/fde-self-evaluation.md 자기평가 참조).",
     "developerName": "SeokRae",
     "category": "workflow",
     "capabilities": ["spec-driven", "context-management", "ratchet-principle"],

@@ -1,6 +1,8 @@
 # FDE Harness — Claude Code & Codex Dual Plugin
 
-Forward Deployed Engineer 방법론을 AI 코딩 에이전트의 작업 흐름으로 구현한 최소 하네스 플러그인입니다. **Claude Code와 OpenAI Codex 양쪽에서 동일하게 작동**합니다.
+Forward Deployed Engineer 실천 일부를 차용한 AI 코딩 에이전트 하네스 플러그인입니다. **Claude Code와 OpenAI Codex 양쪽에서 동일하게 작동**합니다.
+
+> **현재 등급: FDE-inspired** — 헌장 [`docs/fde-criteria.md`](docs/fde-criteria.md) 의 3-Tier 명명 체계 기준. 자기평가 결과·등급 결정 근거·강화 후보는 [`docs/fde-self-evaluation.md`](docs/fde-self-evaluation.md) 참조.
 
 ## 무엇을 하는가
 

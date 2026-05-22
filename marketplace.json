@@ -10,7 +10,7 @@
       },
       "interface": {
         "displayName": "FDE Harness",
-        "shortDescription": "Spec 기반 FDE 개발 워크플로우"
+        "shortDescription": "FDE-inspired Spec-Driven 코딩 하네스"
       },
       "installPolicy": "AVAILABLE",
       "authentication": "ON_FIRST_USE"
