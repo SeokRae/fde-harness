@@ -1,13 +1,21 @@
 ---
 name: discovery-echo
-description: 인터뷰·관찰 노트(notes/*.md)를 spec 초안(discovery-drafts/DRAFT-*.md)으로 옮기는 Discovery 보조 스킬. 사용자가 "노트로 draft 만들어줘", "discovery-drafts", "DRAFT-", "/fde-draft", "인터뷰 노트", "notes/ 폴더의 draft"를 언급하거나, 프로젝트 루트에 notes/ 폴더가 있는 상태에서 spec 초안화를 시작할 때 자동으로 트리거됩니다.
+description: FDE 딥다이브 모드의 *Discovery 단계* 보조 — 인터뷰·관찰 노트(notes/*.md)를 spec 초안(discovery-drafts/DRAFT-*.md)으로 옮기는 스킬. 사용자가 "노트로 draft 만들어줘", "discovery-drafts", "DRAFT-", "/fde-draft", "인터뷰 노트", "딥다이브 Discovery"를 언급하거나, 프로젝트 루트에 notes/ 폴더가 있는 상태에서 spec 초안화를 시작할 때 자동으로 트리거됩니다.
 ---
 
-# Discovery Echo Skill
+# Discovery Echo Skill — 딥다이브 모드의 Discovery 단계 보조
 
-이 스킬은 **Spec이 작성되기 *전*** 단계, 즉 사람의 인터뷰·관찰·자료 수집(=Discovery)에서 나온 노트를 spec 초안으로 옮기는 보조 스킬입니다. Spec 본문의 단일 진실 공급원은 여전히 사람(Echo)이지만, 노트가 흩어져 있을 때 초안 생성의 마찰을 줄여줍니다.
+> **모드**: 딥다이브 (Deep dive). 헌장 [`docs/fde-criteria.md`](../../docs/fde-criteria.md) § 1.4 의 1-3개월 사이클 전용 보조.
+>
+> **"Discovery" 단어의 두 의미 — 본 스킬은 (b) 만**:
+> - **(a) 작업 모드** (헌장 § 1.4 의 잠재 후보 — 현재 부재) — 며칠~2주의 *발견* 위주 모드. *본 스킬과 무관*.
+> - **(b) `fde-workflow` 의 1단계** — 딥다이브 사이클 안의 *Discovery 단계* (Operator → 노트 → spec). **본 스킬은 (b) 의 보조**.
+>
+> 이 모호함은 헌장 § 7.3 의 미해결 항목. 향후 명명 정리 가능 (스킬 이름 변경 후보).
 
-> **위치**: Discovery는 `/fde-plan` 이전 단계입니다 (cycle-guide의 Stage 0 에 해당).
+이 스킬은 **Spec이 작성되기 *전*** 단계, 즉 사람의 인터뷰·관찰·자료 수집(=딥다이브 사이클의 Discovery 단계) 에서 나온 노트를 spec 초안으로 옮기는 보조 스킬입니다. Spec 본문의 단일 진실 공급원은 여전히 사람(Echo)이지만, 노트가 흩어져 있을 때 초안 생성의 마찰을 줄여줍니다.
+
+> **위치**: 딥다이브 모드의 `/fde-plan` 이전 단계입니다 (cycle-guide의 Stage 0 에 해당).
 >
 > ```
 > 인터뷰/관찰 → notes/*.md  ──[discovery-echo]──▶  discovery-drafts/DRAFT-*.md  ──[Echo 검토·이동]──▶  specs/*.md  ──▶  /fde-plan
@@ -77,13 +85,20 @@ description: 인터뷰·관찰 노트(notes/*.md)를 spec 초안(discovery-draft
 
 ## 트리거 키워드
 
-다음 표현이 사용자 메시지에 나오면 이 스킬을 적용합니다:
-- "discovery", "discovery-drafts", "DRAFT-"
+다음 표현이 사용자 메시지에 나오면 이 스킬을 적용합니다 (딥다이브 모드 가정):
+- "딥다이브 Discovery", "discovery-drafts", "DRAFT-"
 - "노트로 draft", "노트에서 spec", "인터뷰 노트"
 - "/fde-note", "/fde-draft"
 - "notes/ 폴더"
 
-## 관련 슬래시 커맨드
+**모드 한정**: 스플릿 모드 (며칠~2주) 에서는 *옆에서 매일 관찰* 이 노트 작성보다 우선 → 본 스킬 보조 역할 약화. 챔피언 모드 (6개월+) 에서는 *후임자 transfer* 로 Discovery 의 의미 전환 → `/fde-graduate` 가 우선.
 
-- `/fde-note <제목>` — `notes/` 에 새 노트를 템플릿으로 생성 (사람이 채울 빈 양식)
-- `/fde-draft [노트ID]` — 노트를 읽어 `discovery-drafts/DRAFT-*.md` 초안을 생성 (이 스킬을 호출)
+## 관련 헌장 섹션
+
+- [`docs/fde-criteria.md`](../../docs/fde-criteria.md) **§ 1.4** — 3 모드 정의 (본 스킬은 딥다이브 전용)
+- [`docs/fde-criteria.md`](../../docs/fde-criteria.md) **§ 2.F1** — Co-location 의 강제 항목 (관찰 증거)
+- [`docs/fde-criteria.md`](../../docs/fde-criteria.md) **§ 7.3** — "Discovery" 용어 충돌의 미해결 큐
+
+## 관련 스킬
+
+- [`skills/fde-workflow`](../fde-workflow/SKILL.md) — 본 스킬을 *호출* 하는 부모. 딥다이브 사이클의 1단계 에서 본 스킬 활성화.

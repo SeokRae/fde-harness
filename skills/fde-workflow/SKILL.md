@@ -1,17 +1,30 @@
 ---
 name: fde-workflow
-description: Spec 파일을 코드로 변환하는 FDE 방법론 워크플로우를 수행할 때 사용합니다. 사용자가 "spec을 구현해줘", "다음 작업할 spec", "FDE 워크플로우", "specs/ 폴더의 작업"을 언급하거나, 프로젝트 루트에 specs/ 폴더가 있는 작업을 시작할 때 자동으로 트리거됩니다.
+description: FDE 딥다이브 모드 (1-3개월 사이클) 의 Spec → Plan → Implement → Verify → Ratchet 워크플로우. 사용자가 "spec을 구현해줘", "다음 작업할 spec", "딥다이브 사이클", "specs/ 폴더의 작업"을 언급하거나, 프로젝트 루트에 specs/ 폴더가 있는 작업을 시작할 때 자동으로 트리거됩니다. 스플릿·챔피언 모드 키워드 감지 시 본 스킬 비활성 권장.
 ---
 
-# FDE Workflow Skill
+# FDE Workflow Skill — 딥다이브 모드 전용
 
-이 스킬은 Forward Deployed Engineer 방법론을 AI 코딩 에이전트의 작업 사이클로 구현한 것입니다. Spec → Plan → Implement → Verify → Ratchet 의 5단계 루프를 따릅니다.
+> **모드**: 딥다이브 (Deep dive). 헌장 [`docs/fde-criteria.md`](../../docs/fde-criteria.md) § 1.4 의 3 모드 중 *1-3개월 사이클* 전용.
+>
+> **다른 모드는 본 스킬의 범위 밖**:
+> - 스플릿 (Split, 며칠~2주) — 본 도구 미지원 (헌장 § 7.2)
+> - 챔피언 (Champion, 6개월+) — `/fde-graduate` 만 지원 (graduation 외 의식 부재)
+
+이 스킬은 FDE *딥다이브 모드* 의 표준 사이클을 AI 코딩 에이전트의 작업 루프로 구현한 것입니다. Spec → Plan → Implement → Verify → Ratchet 의 5단계.
 
 ## 기본 원칙
 
 1. **Spec이 계약이다** — `specs/*.md` 파일이 "무엇을 만들지"에 대한 단일 진실 공급원(single source of truth)입니다. Spec에 없는 것은 만들지 않습니다.
 2. **인간 승인 게이트** — 코드를 작성하기 전에 반드시 계획을 사람에게 보고하고 승인을 받습니다.
 3. **Ratchet 원리** — 실패가 발견되면 같은 실패가 다시 일어나지 못하도록 `AGENTS.md` 또는 `CLAUDE.md`의 "절대 하지 말 것" 섹션에 규칙을 추가합니다.
+
+## 모드 외 사용 안내
+
+사용자 메시지에 *다른 모드 키워드* 가 보이면 본 스킬은 비활성 권장:
+
+- **스플릿 키워드**: "스프린트", "데일리 ratchet", "movable demo", "throwaway", "며칠 안에" → 본 도구는 스플릿 모드 미지원 (헌장 § 1.4). 사용자에게 모드 한정 안내.
+- **챔피언 키워드**: "graduation", "champion 인수", "Long-term", "내가 떠난 후", "6개월 후" → `/fde-graduate` 커맨드 안내 (graduation 만 지원, 다른 챔피언 의식은 미지원).
 
 ## 작업 사이클
 
@@ -84,7 +97,16 @@ Spec의 "Done means" 체크리스트를 한 항목씩 확인한다:
 
 ## 트리거 키워드
 
-다음 표현이 사용자 메시지에 나오면 이 스킬을 적용한다:
+다음 표현이 사용자 메시지에 나오면 이 스킬을 적용한다 (딥다이브 모드 가정):
 - "spec 구현", "spec을 코드로", "specs/ 폴더"
-- "다음 작업", "다음 spec", "FDE 워크플로우"
+- "다음 작업", "다음 spec", "딥다이브 사이클", "FDE 워크플로우"
 - "Done means", "Spec ID"
+- 모드 명시 — "딥다이브", "Deep dive"
+
+**다른 모드 키워드 감지 시 본 스킬 비활성** — 위 § "모드 외 사용 안내" 참조.
+
+## 관련 헌장 섹션
+
+- [`docs/fde-criteria.md`](../../docs/fde-criteria.md) **§ 1.4** — 3 모드 정의 + 본 도구 지원 현황
+- [`docs/fde-criteria.md`](../../docs/fde-criteria.md) **§ 5.3** — 공통 조건의 "모드 명시" 의무
+- [`docs/fde-criteria.md`](../../docs/fde-criteria.md) **§ 7.2** — 본 도구 기본 모드 = 딥다이브 결정
