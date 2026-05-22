@@ -69,11 +69,11 @@ FDE 는 *기간* 에 따라 3가지 사이클 패턴이 있다 (Palantir 실천�
 - 단순 *언급* 만으로는 충족 안 됨 — 자산 1개 이상 필요
 
 **fde-harness 의 현재 모드 지원** (§ 5.2 평가용):
-- 스플릿: ❌ (자산 없음)
+- 스플릿: 🟢 거의 완전 (spec 013 부터: `skills/fde-sprint-workflow` + `/fde-sprint` + `/fde-daily` + `/fde-demo` + 2 templates)
 - 딥다이브: ✅ (기본 모드, 모든 사이클 자산)
 - 챔피언: 🟢 거의 완전 (spec 011 부터: `skills/fde-champion-workflow` + `/fde-graduate` + `/fde-monthly-review` + 2 templates)
 
-→ 현재 모드 커버리지: **약 1.85/3** (딥다이브 ✓ + 챔피언 거의 완전 0.85)
+→ 현재 모드 커버리지: **약 2.85/3** (스플릿 0.85 + 딥다이브 ✓ + 챔피언 0.85)
 
 ---
 
@@ -313,7 +313,7 @@ fde-harness 의 README·플러그인 description 등에 사용 가능한 명명�
 ### 7.2 결정된 항목 (이전 미해결 → 결정)
 
 - **F2 의 weekly fallback 거부 (spec 007)**: 본업이 따로 있는 1인 메이커의 사용 패턴이 weekly 인 경우 — **weekly fallback 은 FDE 가 아니다**. fde-harness 가 weekly 사용 패턴이면 § 5 의 F2 강제 인정 불가. weekly 사용 자체는 막지 않으나, 정직성을 위해 *등급 한정* (FDE-inspired 이하) 필요.
-- **본 도구의 기본 모드 = 딥다이브 (spec 009)**: fde-harness 는 *딥다이브 모드* 만 *기본 지원*. *스플릿 모드는 미지원* (자산 없음, 자산 추가 시 별도 spec). *챔피언 모드는 부분 지원* (graduation 자산 1개 — `/fde-graduate` + `templates/graduation-template.md` 부터). 다른 모드의 추가 자산 (예: `/fde-sprint`, `/fde-monthly-review`) 은 별도 spec 사이클의 대상.
+- **본 도구의 모드 지원 (spec 009·011·013 누적)**: fde-harness 는 *3 모드 모두 거의 완전 지원*. *딥다이브 모드* (기본, 모든 사이클 자산), *챔피언 모드* (spec 011 — graduation + monthly-review), *스플릿 모드* (spec 013 — sprint + daily + demo). 각 모드의 *완전 1.0* 까지의 잔여 자산 (예: 챔피언의 KPI 자동 통합, 스플릿의 retrospective 자동화) 은 별도 spec 사이클의 대상.
 
 ### 7.3 미해결 — 데이터·사용 누적 후 결정
 

@@ -89,7 +89,7 @@
 
 | 모드 | 본 도구 지원 | 시간감 | 이 모드 사용 시 의무 |
 |------|------------|--------|---------------------|
-| **스플릿** | ❌ 미지원 | 며칠 ~ 2주 | (자산 없음 — 사용 시 본 도구의 등급 평가 왜곡 가능) |
+| **스플릿** | 🟢 거의 완전 (sprint + daily + demo) | 며칠 ~ 2주 | `/fde-sprint` 로 deadline 강제 spec + `/fde-daily` 로 매일 학습 + `/fde-demo` 로 가설 검증. `fde-sprint-workflow` 스킬 자동 트리거 |
 | **딥다이브** | ✅ 지원 (default) | 1 ~ 3개월 | spec → plan → impl → done 사이클. Ratchet 누적 |
 | **챔피언** | 🟢 거의 완전 (graduation + 월간 리뷰) | 6개월 ~ 1년+ | `/fde-graduate` 로 후임자 transfer + `/fde-monthly-review` 로 월간 리듬. `fde-champion-workflow` 스킬 자동 트리거 |
 
