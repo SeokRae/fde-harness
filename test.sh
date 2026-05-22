@@ -35,7 +35,7 @@ for f in .claude-plugin/plugin.json .codex-plugin/plugin.json .mcp.json hooks/po
 done
 
 # 3. commands_count — README 와 동기 (현재 6 개)
-EXPECTED_COMMANDS=6
+EXPECTED_COMMANDS=7
 ACTUAL_COMMANDS=$(find commands -maxdepth 1 -name '*.md' -type f | wc -l | tr -d ' ')
 if [ "$ACTUAL_COMMANDS" -eq "$EXPECTED_COMMANDS" ]; then
   pass "commands_count ($ACTUAL_COMMANDS)"
@@ -52,8 +52,8 @@ else
   fail "skills_count" "기대 $EXPECTED_SKILLS, 실제 $ACTUAL_SKILLS — README 의 'Skills' 개수와 test.sh 의 EXPECTED_SKILLS 를 동시에 갱신했는가?"
 fi
 
-# 5. templates_present — 필수 템플릿 3종
-for t in templates/spec-template.md templates/note-template.md templates/AGENTS.md; do
+# 5. templates_present — 필수 템플릿 4종
+for t in templates/spec-template.md templates/note-template.md templates/AGENTS.md templates/graduation-template.md; do
   if [ -f "$t" ]; then
     pass "templates_present ($t)"
   else
