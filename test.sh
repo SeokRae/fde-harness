@@ -61,6 +61,21 @@ for t in templates/spec-template.md templates/note-template.md templates/AGENTS.
   fi
 done
 
+# 6. ratchet_sections — 양방향 학습 4 섹션 hard 강제 (헌장 § 2.F5 / spec 014)
+#    첫 forcing function hard 강제. templates/AGENTS.md 가 4 섹션을 모두 포함해야 한다.
+RATCHET_FILE="templates/AGENTS.md"
+RATCHET_MISSING=""
+for section in "### 절대 하지 말 것" "### 검증된 패턴" "### 운영자가 가르친 것" "### 운영자에게 보여준 가능성"; do
+  if ! grep -qF "$section" "$RATCHET_FILE"; then
+    RATCHET_MISSING="$RATCHET_MISSING [$section]"
+  fi
+done
+if [ -z "$RATCHET_MISSING" ]; then
+  pass "ratchet_sections (4 섹션 — 음·양·도메인·가능성)"
+else
+  fail "ratchet_sections" "$RATCHET_FILE 에 누락:$RATCHET_MISSING — 양방향 학습 4 섹션은 단방향 누적, 제거 금지 (헌장 § 2.F5)"
+fi
+
 echo
 if [ "$FAIL" -eq 0 ]; then
   echo "ALL PASS"
