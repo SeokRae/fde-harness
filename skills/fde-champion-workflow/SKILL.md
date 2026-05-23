@@ -64,7 +64,7 @@ Champion 후보가 *자체 유지 가능* 신호 보일 때:
 
 사용자 메시지에 *다른 모드 키워드* 가 보이면 본 스킬은 비활성 권장:
 
-- **스플릿 키워드**: "스프린트", "데일리", "movable demo", "며칠 안에" → 본 도구는 스플릿 모드 미지원. 사용자에게 안내.
+- **스플릿 키워드**: "스프린트", "데일리", "movable demo", "며칠 안에" → [`fde-sprint-workflow`](../fde-sprint-workflow/SKILL.md) 활성 (spec 013 부터).
 - **딥다이브 키워드**: "spec 구현", "다음 spec", "딥다이브 사이클", "Done means" → [`fde-workflow`](../fde-workflow/SKILL.md) 활성. 본 스킬은 *모드가 챔피언 일 때* 만 작동.
 
 ## 트리거 키워드

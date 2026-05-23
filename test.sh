@@ -35,7 +35,7 @@ for f in .claude-plugin/plugin.json .codex-plugin/plugin.json .mcp.json hooks/po
 done
 
 # 3. commands_count — README 와 동기 (현재 6 개)
-EXPECTED_COMMANDS=8
+EXPECTED_COMMANDS=11
 ACTUAL_COMMANDS=$(find commands -maxdepth 1 -name '*.md' -type f | wc -l | tr -d ' ')
 if [ "$ACTUAL_COMMANDS" -eq "$EXPECTED_COMMANDS" ]; then
   pass "commands_count ($ACTUAL_COMMANDS)"
@@ -44,7 +44,7 @@ else
 fi
 
 # 4. skills_count — README 와 동기 (현재 2 개)
-EXPECTED_SKILLS=3
+EXPECTED_SKILLS=4
 ACTUAL_SKILLS=$(find skills -mindepth 2 -maxdepth 2 -name SKILL.md -type f | wc -l | tr -d ' ')
 if [ "$ACTUAL_SKILLS" -eq "$EXPECTED_SKILLS" ]; then
   pass "skills_count ($ACTUAL_SKILLS)"
@@ -52,8 +52,8 @@ else
   fail "skills_count" "기대 $EXPECTED_SKILLS, 실제 $ACTUAL_SKILLS — README 의 'Skills' 개수와 test.sh 의 EXPECTED_SKILLS 를 동시에 갱신했는가?"
 fi
 
-# 5. templates_present — 필수 템플릿 5종
-for t in templates/spec-template.md templates/note-template.md templates/AGENTS.md templates/graduation-template.md templates/monthly-review-template.md; do
+# 5. templates_present — 필수 템플릿 7종
+for t in templates/spec-template.md templates/note-template.md templates/AGENTS.md templates/graduation-template.md templates/monthly-review-template.md templates/spec-template-sprint.md templates/daily-ratchet-template.md; do
   if [ -f "$t" ]; then
     pass "templates_present ($t)"
   else

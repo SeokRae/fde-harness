@@ -23,7 +23,7 @@ description: FDE 딥다이브 모드 (1-3개월 사이클) 의 Spec → Plan →
 
 사용자 메시지에 *다른 모드 키워드* 가 보이면 본 스킬은 비활성 권장:
 
-- **스플릿 키워드**: "스프린트", "데일리 ratchet", "movable demo", "throwaway", "며칠 안에" → 본 도구는 스플릿 모드 미지원 (헌장 § 1.4). 사용자에게 모드 한정 안내.
+- **스플릿 키워드**: "스프린트", "데일리 ratchet", "movable demo", "throwaway", "며칠 안에" → [`fde-sprint-workflow`](../fde-sprint-workflow/SKILL.md) 활성 (며칠 sprint 의식 지원, spec 013 부터).
 - **챔피언 키워드**: "graduation", "champion 인수", "Long-term", "내가 떠난 후", "6개월 후", "월간 리뷰" → [`fde-champion-workflow`](../fde-champion-workflow/SKILL.md) 활성 (graduation + monthly review 지원).
 
 ## 작업 사이클
