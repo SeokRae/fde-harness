@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FDE Flow — 시각적 학습 가이드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+:root {
+  --c-bg: #0f172a;
+  --c-bg-2: #1e293b;
+  --c-card: #1e293b;
+  --c-text: #e2e8f0;
+  --c-mute: #94a3b8;
+  --c-echo: #f59e0b;
+  --c-delta: #3b82f6;
+  --c-ai: #a855f7;
+  --c-split: #ef4444;
+  --c-deep: #10b981;
+  --c-champ: #06b6d4;
+  --c-success: #10b981;
+  --c-warn: #f59e0b;
+  --c-danger: #ef4444;
+  --c-line: rgba(148, 163, 184, 0.2);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+  background: var(--c-bg);
+  color: var(--c-text);
+  line-height: 1.7;
+  font-weight: 400;
+}
+code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+
+/* Hero */
+.hero {
+  padding: 80px 24px 60px;
+  text-align: center;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-bottom: 1px solid var(--c-line);
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #f59e0b, #3b82f6, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+.hero .subtitle {
+  font-size: 1.1rem;
+  color: var(--c-mute);
+  max-width: 720px;
+  margin: 0 auto 24px;
+}
+.hero .meta {
+  display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  font-size: 0.85rem;
+}
+.hero .meta span {
+  padding: 4px 12px;
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 999px;
+  border: 1px solid var(--c-line);
+}
+
+/* Nav */
+nav.toc {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--c-line);
+  padding: 12px 24px;
+  display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+  font-size: 0.85rem;
+}
+nav.toc a {
+  color: var(--c-mute);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+nav.toc a:hover {
+  color: var(--c-text);
+  background: rgba(148, 163, 184, 0.1);
+}
+
+/* Section */
+section {
+  padding: 64px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--c-line);
+}
+section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 12px;
+}
+section h2 .num {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--c-mute);
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+section .lead {
+  color: var(--c-mute);
+  font-size: 1.05rem;
+  margin-bottom: 36px;
+  max-width: 800px;
+}
+section h3 {
+  font-size: 1.25rem;
+  margin: 36px 0 16px;
+  font-weight: 600;
+}
+
+/* 3-Actor */
+.actors {
+  display: grid; gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.actor {
+  background: var(--c-card);
+  border: 2px solid var(--c-line);
+  border-radius: 16px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.actor:hover { transform: translateY(-4px); }
+.actor.echo { border-color: var(--c-echo); }
+.actor.delta { border-color: var(--c-delta); }
+.actor.ai { border-color: var(--c-ai); }
+.actor::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+}
+.actor.echo::before { background: var(--c-echo); }
+.actor.delta::before { background: var(--c-delta); }
+.actor.ai::before { background: var(--c-ai); }
+.actor .emoji { font-size: 2.5rem; margin-bottom: 8px; }
+.actor .name { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+.actor.echo .name { color: var(--c-echo); }
+.actor.delta .name { color: var(--c-delta); }
+.actor.ai .name { color: var(--c-ai); }
+.actor .who { font-size: 0.85rem; color: var(--c-mute); margin-bottom: 16px; }
+.actor h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--c-mute); margin: 12px 0 6px; font-weight: 600; }
+.actor ul { list-style: none; }
+.actor li { padding: 4px 0; font-size: 0.92rem; }
+.actor li::before { content: '→ '; color: currentColor; opacity: 0.6; }
+
+.warning-box {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 32px;
+}
+.warning-box h4 { color: var(--c-danger); margin-bottom: 12px; font-size: 1rem; }
+.warning-box ul { list-style: none; }
+.warning-box li { padding: 6px 0; font-size: 0.9rem; color: var(--c-text); }
+.warning-box li::before { content: '❌ '; }
+
+/* Forcing functions */
+.ff-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.ff {
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.2s;
+}
+.ff:hover { border-color: var(--c-mute); }
+.ff .ff-id {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--c-delta);
+  margin-bottom: 4px;
+}
+.ff .ff-name {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+.ff .ff-desc { font-size: 0.85rem; color: var(--c-mute); margin-bottom: 12px; }
+.ff .ff-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.ff-status.deep { background: rgba(16, 185, 129, 0.2); color: var(--c-success); }
+.ff-status.shallow { background: rgba(245, 158, 11, 0.2); color: var(--c-warn); }
+.ff-status.none { background: rgba(148, 163, 184, 0.15); color: var(--c-mute); }
+
+/* Matrix table */
+.matrix {
+  margin-top: 32px;
+  background: var(--c-card);
+  border-radius: 12px;
+  border: 1px solid var(--c-line);
+  overflow: hidden;
+}
+.matrix table { width: 100%; border-collapse: collapse; }
+.matrix th, .matrix td { padding: 14px 16px; text-align: center; font-size: 0.88rem; border-bottom: 1px solid var(--c-line); border-right: 1px solid var(--c-line); }
+.matrix th { background: rgba(148, 163, 184, 0.08); font-weight: 600; }
+.matrix th:first-child { text-align: left; background: rgba(148, 163, 184, 0.12); }
+.matrix td:first-child { text-align: left; font-weight: 500; }
+.matrix tr:last-child td { border-bottom: none; }
+.matrix td:last-child, .matrix th:last-child { border-right: none; }
+.cell-strong { background: rgba(16, 185, 129, 0.12); color: var(--c-success); font-weight: 600; }
+.cell-mid { background: rgba(245, 158, 11, 0.12); color: var(--c-warn); }
+.cell-weak { background: rgba(148, 163, 184, 0.06); color: var(--c-mute); }
+
+/* Modes timeline */
+.timeline {
+  position: relative;
+  margin: 40px 0;
+  padding: 0 20px;
+}
+.timeline-track {
+  height: 4px;
+  background: linear-gradient(90deg, var(--c-split) 0%, var(--c-split) 33%, var(--c-deep) 33%, var(--c-deep) 66%, var(--c-champ) 66%, var(--c-champ) 100%);
+  border-radius: 2px;
+  margin: 60px 0 60px;
+  position: relative;
+}
+.timeline-track::after {
+  content: '';
+  position: absolute; right: -8px; top: -6px;
+  border-left: 12px solid var(--c-champ);
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+.timeline-marker {
+  position: absolute; top: -10px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--c-bg);
+  border: 4px solid;
+  transform: translateX(-50%);
+}
+.timeline-marker.split { left: 16%; border-color: var(--c-split); }
+.timeline-marker.deep { left: 50%; border-color: var(--c-deep); }
+.timeline-marker.champ { left: 83%; border-color: var(--c-champ); }
+.timeline-label {
+  position: absolute;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 0.85rem;
+}
+.timeline-label.above { top: -45px; }
+.timeline-label.below { top: 25px; }
+.timeline-label .mode-name { font-weight: 700; font-size: 1rem; display: block; margin-bottom: 4px; }
+.timeline-label.above.split { left: 16%; color: var(--c-split); }
+.timeline-label.above.deep { left: 50%; color: var(--c-deep); }
+.timeline-label.above.champ { left: 83%; color: var(--c-champ); }
+.timeline-label.below.split { left: 16%; color: var(--c-mute); }
+.timeline-label.below.deep { left: 50%; color: var(--c-mute); }
+.timeline-label.below.champ { left: 83%; color: var(--c-mute); }
+
+/* Mode cards */
+.modes {
+  display: grid; gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 32px;
+}
+.mode-card {
+  background: var(--c-card);
+  border: 2px solid var(--c-line);
+  border-radius: 14px;
+  padding: 24px;
+}
+.mode-card.split { border-color: var(--c-split); }
+.mode-card.deep { border-color: var(--c-deep); }
+.mode-card.champ { border-color: var(--c-champ); }
+.mode-card .mode-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.mode-card.split .mode-tag { background: rgba(239, 68, 68, 0.18); color: var(--c-split); }
+.mode-card.deep .mode-tag { background: rgba(16, 185, 129, 0.18); color: var(--c-deep); }
+.mode-card.champ .mode-tag { background: rgba(6, 182, 212, 0.18); color: var(--c-champ); }
+.mode-card h4 { font-size: 1.25rem; margin-bottom: 6px; }
+.mode-card .duration { color: var(--c-mute); font-size: 0.88rem; margin-bottom: 16px; }
+.mode-card .commands {
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+}
+.mode-card .commands code {
+  display: block;
+  padding: 3px 0;
+  color: var(--c-text);
+  font-size: 0.82rem;
+}
+.mode-card .commands code .comment { color: var(--c-mute); }
+.mode-card h5 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--c-mute); margin: 12px 0 6px; font-weight: 600; }
+
+/* Cycle mermaid */
+.diagram-wrap {
+  background: var(--c-card);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid var(--c-line);
+  margin: 24px 0;
+  overflow-x: auto;
+}
+.diagram-wrap .mermaid { text-align: center; }
+
+/* Grade matrix */
+.grade-matrix {
+  margin-top: 32px;
+  background: var(--c-card);
+  border-radius: 12px;
+  border: 1px solid var(--c-line);
+  padding: 24px;
+}
+.grade-grid {
+  display: grid;
+  grid-template-columns: auto repeat(3, 1fr);
+  gap: 4px;
+  margin-top: 16px;
+}
+.grade-grid .gh {
+  padding: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  background: rgba(148, 163, 184, 0.08);
+  border-radius: 6px;
+}
+.grade-grid .gh.row { text-align: left; }
+.grade-grid .gc {
+  padding: 14px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  text-align: center;
+  font-weight: 500;
+  background: rgba(148, 163, 184, 0.05);
+}
+.grade-grid .gc.fde-complete { background: rgba(16, 185, 129, 0.18); color: var(--c-success); border: 2px solid var(--c-success); font-weight: 700; }
+.grade-grid .gc.fde-proper { background: rgba(59, 130, 246, 0.15); color: var(--c-delta); }
+.grade-grid .gc.fde-inspired { background: rgba(245, 158, 11, 0.12); color: var(--c-warn); }
+.grade-grid .gc.excluded { color: var(--c-mute); }
+.grade-grid .gc.current {
+  position: relative;
+  outline: 2px solid var(--c-echo);
+  outline-offset: -2px;
+}
+.grade-grid .gc.current::after {
+  content: '현 위치';
+  position: absolute; top: 4px; right: 4px;
+  font-size: 0.65rem;
+  background: var(--c-echo);
+  color: #000;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+/* Footer */
+footer {
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--c-mute);
+  font-size: 0.85rem;
+}
+footer a { color: var(--c-delta); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  section { padding: 48px 16px; }
+  section h2 { font-size: 1.5rem; }
+  .timeline-track { margin: 80px 0 80px; }
+  .grade-grid { grid-template-columns: 1fr; }
+  .grade-grid .gh.col { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>FDE Flow — 시각적 학습</h1>
+  <p class="subtitle">Forward Deployed Engineer 의 개념·역할·forcing function·모드를 한눈에. fde-harness 가 채택한 헌장 기준으로 설명합니다.</p>
+  <div class="meta">
+    <span>3-Actor</span>
+    <span>5 Forcing Functions</span>
+    <span>3 Modes</span>
+    <span>2D 등급</span>
+  </div>
+</div>
+
+<nav class="toc">
+  <a href="#what">FDE 란?</a>
+  <a href="#actors">3-Actor</a>
+  <a href="#forcing">5 Forcing</a>
+  <a href="#modes">3 Modes</a>
+  <a href="#cycle">사이클</a>
+  <a href="#grade">2D 등급</a>
+  <a href="#components">컴포넌트</a>
+</nav>
+
+<section id="what">
+  <h2><span class="num">§ 1</span> FDE 란 무엇인가</h2>
+  <p class="lead">
+    <strong>Forward Deployed Engineer</strong> — Palantir 의 직무 호칭에서 출발한 *실천 문화*. Scrum 처럼 공식 ceremony 가 정해진 *방법론* 이 아니라, "엔지니어가 고객 옆에서 며칠 단위로 워크플로를 깊이 침투하는 방식".
+  </p>
+
+  <div class="actors" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+    <div class="actor" style="border-color: var(--c-mute);">
+      <div class="emoji">📜</div>
+      <div class="name" style="color: var(--c-text);">공식 방법론?</div>
+      <div class="who">❌ 아니다. 직무 + 문화.</div>
+    </div>
+    <div class="actor" style="border-color: var(--c-mute);">
+      <div class="emoji">🏛️</div>
+      <div class="name" style="color: var(--c-text);">출처</div>
+      <div class="who">Palantir Technologies (2010년대)</div>
+    </div>
+    <div class="actor" style="border-color: var(--c-mute);">
+      <div class="emoji">📖</div>
+      <div class="name" style="color: var(--c-text);">공식 핸드북</div>
+      <div class="who">❌ 비공개. 채용 공고·회고록 기반 재구성.</div>
+    </div>
+  </div>
+
+  <h3>SaaS 와의 반대 베팅</h3>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr><th>일반 SaaS</th><th>FDE 모델</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>한 제품, 천 명에게 판매</td><td>천 개의 워크플로, 한 명씩 맞춤</td></tr>
+        <tr><td>폭 우선 (수평 확장)</td><td>깊이 우선 (수직 침투)</td></tr>
+        <tr><td>PM 이 우선순위</td><td>운영자가 우선순위</td></tr>
+        <tr><td>Feature backlog</td><td>Workflow ownership</td></tr>
+        <tr><td>사용자 인터뷰</td><td>사용자 옆에서 관찰</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="actors">
+  <h2><span class="num">§ 2</span> 3-Actor Model</h2>
+  <p class="lead">
+    fde-harness 가 채택한 <strong>AI 시대 transpose</strong>. 원전 FDE 는 2-actor (Engineer + Operator) 였으나, AI 보조를 추가해 3-actor 로 확장. 셋의 책임 분리가 무너지면 FDE 가 아니라 SDD 가 된다.
+  </p>
+
+  <div class="actors">
+    <div class="actor echo">
+      <div class="emoji">👤</div>
+      <div class="name">Echo</div>
+      <div class="who">Operator · 도메인 전문가 · <strong>코드 ❌</strong></div>
+      <h4>책임</h4>
+      <ul>
+        <li>가치 정의</li>
+        <li>우선순위 결정</li>
+        <li>수동 검증</li>
+        <li>도메인 권위</li>
+      </ul>
+      <h4>산출물</h4>
+      <ul>
+        <li>Spec 의 Why · Expected outcome (직접 인용)</li>
+        <li>Plan 응답 (승인 / 거절)</li>
+      </ul>
+    </div>
+
+    <div class="actor delta">
+      <div class="emoji">👨‍💻</div>
+      <div class="name">Delta</div>
+      <div class="who">Engineer · 도구 사용자 · <strong>코드 ✓</strong></div>
+      <h4>책임</h4>
+      <ul>
+        <li>Echo 발화를 의역 없이 옮김</li>
+        <li>Spec 작성</li>
+        <li>승인 게이트 통과</li>
+        <li>구현·검증·Ratchet</li>
+      </ul>
+      <h4>산출물</h4>
+      <ul>
+        <li>Spec 본문 · 코드 · 테스트</li>
+        <li>AGENTS.md 규칙</li>
+      </ul>
+    </div>
+
+    <div class="actor ai">
+      <div class="emoji">🤖</div>
+      <div class="name">AI</div>
+      <div class="who">Assistant · Delta 의 보조 · <strong>Echo 와 직접 소통 ❌</strong></div>
+      <h4>가능한 것</h4>
+      <ul>
+        <li>Delta 의 반복 작업 흡수</li>
+        <li>Spec draft 초안</li>
+        <li>Plan 보고 초안</li>
+        <li>코드 generation</li>
+      </ul>
+      <h4>금지</h4>
+      <ul>
+        <li>Echo 의 자리에 앉기</li>
+        <li>가치 판단 · 우선순위</li>
+        <li>도메인 권위적 결정</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="warning-box">
+    <h4>잘못된 등치 (헌장 § 1.2)</h4>
+    <ul>
+      <li>Echo = 개발자 → "도메인 전문가" 정의 무너짐. 그냥 SDD 가 됨</li>
+      <li>Delta = AI → 책임 주체 사라짐. Operator 의 말을 해석할 사람 부재</li>
+      <li>AI = Echo 의 대리 → AI 가 도메인 권위가 됨. FDE 의 가장 큰 위반</li>
+    </ul>
+  </div>
+</section>
+
+<section id="forcing">
+  <h2><span class="num">§ 3</span> 5 Forcing Functions</h2>
+  <p class="lead">
+    FDE 실천을 SDD·Agile·DevOps 와 구분짓는 다섯 가지. fde-harness 는 이 5개에 대해 *어떤 형식이든 강제하는가* 로 평가된다. 각 F# 의 강도가 모드별로 다르다.
+  </p>
+
+  <div class="ff-grid">
+    <div class="ff">
+      <div class="ff-id">F1</div>
+      <div class="ff-name">Co-location</div>
+      <div class="ff-desc">Engineer 가 Operator 옆에 있다. 인터뷰 ❌, 관찰 ✅.</div>
+      <span class="ff-status shallow">얕은 진척</span>
+    </div>
+    <div class="ff">
+      <div class="ff-id">F2</div>
+      <div class="ff-name">Days-not-months</div>
+      <div class="ff-desc">며칠 안 movable demo. perfectionism 거부.</div>
+      <span class="ff-status none">진척 없음</span>
+    </div>
+    <div class="ff">
+      <div class="ff-id">F3</div>
+      <div class="ff-name">Operator Priority</div>
+      <div class="ff-desc">PM 도 매니저도 아닌 Operator 가 우선순위 결정.</div>
+      <span class="ff-status none">진척 없음</span>
+    </div>
+    <div class="ff">
+      <div class="ff-id">F4</div>
+      <div class="ff-name">Operator's Language</div>
+      <div class="ff-desc">가치는 Operator 의 단위로. 분·결정·오류 건수. LOC ❌.</div>
+      <span class="ff-status none">진척 없음</span>
+    </div>
+    <div class="ff">
+      <div class="ff-id">F5</div>
+      <div class="ff-name">Two-way Learning</div>
+      <div class="ff-desc">Operator ↔ Engineer 양방향. 음+양 학습 영속화.</div>
+      <span class="ff-status deep">깊은 진척 ⭐</span>
+    </div>
+  </div>
+
+  <h3>모드별 강도 매트릭스</h3>
+  <p class="lead" style="margin-bottom: 16px;">같은 forcing function 도 모드에 따라 강도가 다르다. 스플릿은 F1·F2·F3 최대, 챔피언은 F4·F5 최대.</p>
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>스플릿<br><small>며칠~2주</small></th>
+          <th>딥다이브<br><small>1-3개월</small></th>
+          <th>챔피언<br><small>6개월+</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>F1 Co-location</td><td class="cell-strong">⭐⭐⭐⭐⭐ 매일 옆</td><td class="cell-mid">⭐⭐⭐⭐ 주 3-5일</td><td class="cell-weak">⭐⭐ 주 1-2일 + 비동기</td></tr>
+        <tr><td>F2 속도</td><td class="cell-strong">⭐⭐⭐⭐⭐ 며칠</td><td class="cell-mid">⭐⭐⭐⭐ 주 단위</td><td class="cell-weak">⭐⭐ 월 단위</td></tr>
+        <tr><td>F3 우선순위</td><td class="cell-strong">⭐⭐⭐⭐⭐ 1 워크플로</td><td class="cell-mid">⭐⭐⭐⭐ 5-10 큐</td><td class="cell-weak">⭐⭐ 고객측 운영</td></tr>
+        <tr><td>F4 단위</td><td class="cell-mid">⭐⭐⭐⭐⭐ 직접 발화</td><td class="cell-mid">⭐⭐⭐⭐ 구조화 정량</td><td class="cell-strong">⭐⭐⭐⭐ KPI 통합</td></tr>
+        <tr><td>F5 양방향</td><td class="cell-mid">⭐⭐⭐⭐ 빠른 회수</td><td class="cell-strong">⭐⭐⭐⭐⭐ 누적</td><td class="cell-strong">⭐⭐⭐⭐⭐ 멘토 전수</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="modes">
+  <h2><span class="num">§ 4</span> 3 Modes — 기간별 사이클 패턴</h2>
+  <p class="lead">
+    FDE 는 *기간* 에 따라 사이클 패턴이 달라진다. fde-harness 는 3 모드 모두 거의 완전 지원.
+  </p>
+
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-marker split"></div>
+      <div class="timeline-marker deep"></div>
+      <div class="timeline-marker champ"></div>
+      <div class="timeline-label above split"><span class="mode-name">스플릿</span>Hit team</div>
+      <div class="timeline-label above deep"><span class="mode-name">딥다이브</span>Embed</div>
+      <div class="timeline-label above champ"><span class="mode-name">챔피언</span>Long-term</div>
+      <div class="timeline-label below split">며칠 ~ 2주</div>
+      <div class="timeline-label below deep">1 ~ 3개월</div>
+      <div class="timeline-label below champ">6개월 ~ 1년+</div>
+    </div>
+  </div>
+
+  <div class="modes">
+    <div class="mode-card split">
+      <span class="mode-tag">Mode 1</span>
+      <h4>스플릿 (Split)</h4>
+      <div class="duration">며칠 ~ 2주 · throwaway prototype 허용</div>
+      <p>한 워크플로의 한 조각만. 매일 Operator 옆에서. <strong>F1·F2·F3 최대 강도</strong>.</p>
+      <h5>5 페이즈</h5>
+      <p style="font-size: 0.85rem;">Observe → Sketch → Build → Daily → Demo</p>
+      <h5>제공 자산</h5>
+      <div class="commands">
+        <code><span class="comment"># spec 생성 (deadline 강제)</span></code>
+        <code>/fde-sprint &lt;제목&gt; [며칠]</code>
+        <code><span class="comment"># 매일 끝 한 줄 학습</span></code>
+        <code>/fde-daily [학습]</code>
+        <code><span class="comment"># 데모 + 가설 검증</span></code>
+        <code>/fde-demo</code>
+      </div>
+    </div>
+
+    <div class="mode-card deep">
+      <span class="mode-tag">Mode 2 · 기본</span>
+      <h4>딥다이브 (Deep dive)</h4>
+      <div class="duration">1 ~ 3개월 · 구조화된 사이클</div>
+      <p>여러 워크플로 큐. 누적 학습. <strong>모든 F# 균형</strong>.</p>
+      <h5>5 단계</h5>
+      <p style="font-size: 0.85rem;">Discovery → Plan → Implement → Verify → Ratchet</p>
+      <h5>제공 자산</h5>
+      <div class="commands">
+        <code><span class="comment"># Discovery 트랙</span></code>
+        <code>/fde-note &lt;제목&gt;</code>
+        <code>/fde-draft</code>
+        <code><span class="comment"># Spec 사이클</span></code>
+        <code>/fde-spec &lt;제목&gt;</code>
+        <code>/fde-plan</code>
+        <code>/fde-done</code>
+      </div>
+    </div>
+
+    <div class="mode-card champ">
+      <span class="mode-tag">Mode 3</span>
+      <h4>챔피언 (Champion)</h4>
+      <div class="duration">6개월 ~ 1년+ · 멘토 transfer</div>
+      <p>도메인 SME 됨. 고객측 champion 형성. <strong>F4·F5 최대 강도</strong>.</p>
+      <h5>3 페이즈</h5>
+      <p style="font-size: 0.85rem;">SME 형성 → Pair → Graduation·Departure</p>
+      <h5>제공 자산</h5>
+      <div class="commands">
+        <code><span class="comment"># 월간 리듬</span></code>
+        <code>/fde-monthly-review [YYYY-MM]</code>
+        <code><span class="comment"># 후임자 인수</span></code>
+        <code>/fde-graduate &lt;champion&gt;</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cycle">
+  <h2><span class="num">§ 5</span> 가치 사이클 — 가설 · 검증 · 측정</h2>
+  <p class="lead">
+    FDE 의 진짜 사이클은 <code>spec → impl → test</code> 가 아니라 <code>가설 → 구현 검증 → <strong>가치 측정</strong></code>. Done means 통과는 <em>구현</em> 의 검증이지 <em>가치</em> 의 검증이 아니다.
+  </p>
+
+  <div class="diagram-wrap">
+    <div class="mermaid">
+flowchart TD
+    Op["👤 Operator 발화"] --> H["🎯 가설 형성<br/>Operator 단위로 정량화"]
+    H --> S["📄 Spec 계약<br/>What · Why · 가설 · Done means"]
+    S --> P{"✋ Plan + 승인"}
+    P -->|승인| I["⚙️ 구현"]
+    I --> D{"✅ Done means 통과?"}
+    D -->|구현 검증 통과| Dep["🚀 배포"]
+    D -->|실패| Br["4가지 분기"]
+    Br -.-> S
+    Dep --> M["📊 Outcome 측정<br/><b>가치 검증 ⭐</b>"]
+    M --> Next["다음 가설 우선순위 조정"]
+    Next --> Op
+
+    style Op fill:#f59e0b,color:#000,stroke:#f59e0b
+    style M fill:#10b981,color:#000,stroke:#10b981
+    style P fill:#3b82f6,color:#fff,stroke:#3b82f6
+    style D fill:#3b82f6,color:#fff,stroke:#3b82f6
+    style Br fill:#ef4444,color:#fff,stroke:#ef4444
+    </div>
+  </div>
+
+  <div class="warning-box" style="background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.3);">
+    <h4 style="color: var(--c-warn);">⚠️ 핵심 함정</h4>
+    <p style="font-size: 0.92rem;"><strong>가치 측정 없는 사이클은 닫혀 보이지만 실은 열려 있다.</strong> Done means 통과는 *구현* 의 검증. *가치* 의 검증은 배포 후 운영 환경에서만 일어난다. 다음 가설의 우선순위는 *이전 측정 결과* 의 함수여야 사이클이 진짜 연속된다.</p>
+  </div>
+</section>
+
+<section id="grade">
+  <h2><span class="num">§ 6</span> 2-차원 등급 — 명명 정직성</h2>
+  <p class="lead">
+    fde-harness 는 자기 평가를 *2 차원* (F# 강도 × 모드 커버리지) 으로 한다. 등급 결과보다 *높은* 명명 사용 ❌ — 헌장의 가장 강한 binding 규칙.
+  </p>
+
+  <div class="grade-matrix">
+    <h3 style="margin-top: 0;">현재 위치 (v0.6.0)</h3>
+    <div class="grade-grid">
+      <div class="gh"></div>
+      <div class="gh col">F# 강제 0~1</div>
+      <div class="gh col">F# 강제 2+</div>
+      <div class="gh col">깊은 진척 3+</div>
+
+      <div class="gh row">모드 < 1.0</div>
+      <div class="gc excluded">이름에서 FDE 제외</div>
+      <div class="gc fde-inspired">FDE-inspired</div>
+      <div class="gc fde-proper">FDE proper (single)</div>
+
+      <div class="gh row">모드 1.5~2.5</div>
+      <div class="gc excluded">이름에서 FDE 제외</div>
+      <div class="gc fde-inspired current">FDE-inspired (multi-mode)</div>
+      <div class="gc fde-proper">FDE proper</div>
+
+      <div class="gh row">모드 3/3</div>
+      <div class="gc excluded">이름에서 FDE 제외</div>
+      <div class="gc fde-proper">FDE proper (limited)</div>
+      <div class="gc fde-complete">FDE complete ⭐</div>
+    </div>
+
+    <div style="margin-top: 24px; padding: 16px; background: rgba(15, 23, 42, 0.5); border-radius: 8px;">
+      <p style="font-size: 0.88rem;">
+        <strong>현재 fde-harness (v0.6.0):</strong> F# 강제 2 (F1 얕은 · F5 <strong>깊은</strong>) · 모드 커버리지 2.85/3 · 공통 조건 4/4 충족<br>
+        → <strong>FDE-inspired (multi-mode)</strong>. FDE proper 까지 깊은 진척 2개 더 필요.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="components">
+  <h2><span class="num">§ 7</span> 도구 컴포넌트 한눈에</h2>
+  <p class="lead">
+    fde-harness 가 제공하는 자산. 모드별로 어떤 스킬·커맨드·템플릿이 활성화되는지.
+  </p>
+
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr><th>카테고리</th><th>자산</th><th>모드</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>4 Skills</strong></td><td><code>fde-workflow</code></td><td class="cell-mid">딥다이브</td></tr>
+        <tr><td></td><td><code>discovery-echo</code></td><td class="cell-mid">딥다이브</td></tr>
+        <tr><td></td><td><code>fde-champion-workflow</code></td><td class="cell-weak">챔피언</td></tr>
+        <tr><td></td><td><code>fde-sprint-workflow</code></td><td class="cell-strong">스플릿</td></tr>
+        <tr><td><strong>11 Commands</strong></td><td><code>/fde-init</code></td><td>공통</td></tr>
+        <tr><td></td><td><code>/fde-spec</code> · <code>/fde-plan</code> · <code>/fde-done</code> · <code>/fde-note</code> · <code>/fde-draft</code></td><td class="cell-mid">딥다이브</td></tr>
+        <tr><td></td><td><code>/fde-graduate</code> · <code>/fde-monthly-review</code></td><td class="cell-weak">챔피언</td></tr>
+        <tr><td></td><td><code>/fde-sprint</code> · <code>/fde-daily</code> · <code>/fde-demo</code></td><td class="cell-strong">스플릿</td></tr>
+        <tr><td><strong>7 Templates</strong></td><td><code>spec</code> · <code>note</code> · <code>AGENTS</code></td><td class="cell-mid">딥다이브 · 공통</td></tr>
+        <tr><td></td><td><code>graduation</code> · <code>monthly-review</code></td><td class="cell-weak">챔피언</td></tr>
+        <tr><td></td><td><code>spec-sprint</code> · <code>daily-ratchet</code></td><td class="cell-strong">스플릿</td></tr>
+        <tr><td><strong>1 Hook</strong></td><td><code>post-tool-use.json</code> → <code>./test.sh</code></td><td>공통</td></tr>
+        <tr><td><strong>자기 검증</strong></td><td><code>test.sh</code> 17 검증 + GitHub Actions</td><td>공통 · F5 hard 강제</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>F5 첫 hard 강제 (v0.6.0)</h3>
+  <p>
+    <code>test.sh</code> 의 <code>ratchet_sections</code> 검증이 <code>templates/AGENTS.md</code> 가 <strong>양방향 학습 4 섹션</strong> 을 모두 포함하는지 강제. 섹션 제거 시 CI FAIL. <em>설명하는 도구 → 강제하는 도구</em> 전환의 첫 증거.
+  </p>
+  <div class="commands" style="background: rgba(15, 23, 42, 0.5); border-radius: 8px; padding: 16px; margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+    <code>### 절대 하지 말 것</code> &nbsp; <span style="color: var(--c-mute);">(음의 학습)</span><br>
+    <code>### 검증된 패턴</code> &nbsp; <span style="color: var(--c-mute);">(양의 학습)</span><br>
+    <code>### 운영자가 가르친 것</code> &nbsp; <span style="color: var(--c-mute);">(Operator → Engineer)</span><br>
+    <code>### 운영자에게 보여준 가능성</code> &nbsp; <span style="color: var(--c-mute);">(Engineer → Operator)</span>
+  </div>
+</section>
+
+<footer>
+  <p>
+    이 문서는 <a href="https://github.com/SeokRae/fde-harness">SeokRae/fde-harness</a> 의 시각적 학습 가이드입니다.<br>
+    더 자세한 정의·평가·강화 후보는 <a href="fde-criteria.md">헌장</a> · <a href="fde-self-evaluation.md">자기평가</a> · <a href="cycle-guide.md">사이클 가이드</a> 참조.
+  </p>
+</footer>
+
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'dark',
+  themeVariables: {
+    primaryColor: '#1e293b',
+    primaryTextColor: '#e2e8f0',
+    primaryBorderColor: '#94a3b8',
+    lineColor: '#94a3b8',
+    secondaryColor: '#334155',
+    tertiaryColor: '#1e293b',
+    background: '#1e293b',
+    mainBkg: '#1e293b',
+    secondBkg: '#334155',
+    nodeTextColor: '#e2e8f0'
+  }
+});
+</script>
+
+</body>
+</html>
