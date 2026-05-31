@@ -95,9 +95,14 @@
 
 **모드 전환 시**: 모드가 바뀌면 *새 spec* 으로 트리거 (`specs/{ID}-mode-shift-{from}-to-{to}.md`). 모드 변경의 *근거* 가 spec 안에 기록되어야 함.
 
-## 절대 하지 말 것 (Ratchet 영역)
+## Ratchet 영역 — 양방향 학습 4 섹션
 
-> 여기에 한 줄씩 규칙을 추가한다. 새 실패가 발생할 때마다 추가하되, 절대 제거하지 않는다.
+> **헌장 § 2.F5 (Two-way Knowledge Flow)**: Operator 가 Engineer 에게 도메인 가르치고, Engineer 가 Operator 에게 가능성 가르침. **대칭**. 음의 학습만 있으면 FDE 가 아니라 컨설팅.
+> 네 섹션 모두 **단방향 누적** — 한 줄씩 추가하되 절대 제거하지 않는다. 이 4 섹션 구조는 fde-harness 의 `test.sh` 가 hard 강제한다 (제거 시 CI FAIL).
+
+### 절대 하지 말 것 (음의 학습)
+
+> 실패에서 추출한 한 줄 규칙. `/fde-done` Ratchet 단계의 "다시는 일어나면 안 되는 실수?" 답.
 
 - Spec의 "Out of scope" 섹션에 있는 기능은 구현하지 않는다
 - 테스트가 통과하지 않은 상태로 `done` 처리하지 않는다
@@ -105,6 +110,24 @@
 - `.harness/done.log` 를 수동으로 편집하지 않는다 (`/fde-done`만 사용)
 - `.harness/failure-log` 도 수동 편집하지 않는다 (`/fde-done` 의 실패 분기에서만 기록)
 - <!-- 새 규칙 추가 위치 -->
+
+### 검증된 패턴 (양의 학습)
+
+> 이번에 *잘 작동해서* 다음에도 쓰고 싶은 한 줄 규칙. `/fde-done` 의 "잘 작동한 패턴?" 답. 구체적이어야 한다 ("잘 하자" ❌ / "외부 API 호출은 항상 idempotency key 포함" ✅).
+
+- <!-- 검증된 패턴 추가 위치 -->
+
+### 운영자가 가르친 것 (Operator → Engineer 도메인)
+
+> Operator(Echo) 가 가르친 도메인 단어·규칙·예외 케이스. `/fde-done` 의 "Operator 가 가르친 도메인?" 답. AI 의 추측 ❌ — Operator 의 실제 발화.
+
+- <!-- 도메인 학습 추가 위치 -->
+
+### 운영자에게 보여준 가능성 (Engineer → Operator)
+
+> Operator 가 *이전엔 가능한지 몰랐던* 소프트웨어 가능성. `/fde-done` 의 "Operator 가 처음 알게 된 가능성?" 답. 양방향 학습의 *Engineer → Operator* 방향.
+
+- <!-- 가능성 학습 추가 위치 -->
 
 ## 코딩 규칙
 
