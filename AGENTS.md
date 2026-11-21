@@ -8,7 +8,7 @@ Claude Code와 Codex 듀얼 플러그인 `fde-harness`의 소스다. 고객 납�
 
 ## 절대 하지 말 것
 
-- 매니페스트 두 개(`.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`) 중 한쪽만 고치지 않는다. `version`, `description`, `keywords`를 함께 맞춘다.
+- 매니페스트(`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.codex-plugin/plugin.json`) 중 일부만 고치지 않는다. `version`, `description`, `keywords`를 함께 맞춘다.
 - 동작이 바뀌는 변경을 버전 갱신 없이 넣지 않는다.
 - 단계, 게이트, 판정 규칙의 SSoT는 `skills/fde-engagement/references/methodology.md`다. README, SKILL.md, 절차 파일, 템플릿, 커맨드에는 내용을 복사하지 않고 링크만 한다.
 - 스킬 폴더(`skills/fde-engagement/`)는 그것만으로 완결되어야 한다. Claude 앱은 이 폴더만 받는다. SKILL.md와 절차 파일에서 폴더 밖(`../`, `docs/`, `commands/`)을 가리키지 않는다.

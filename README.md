@@ -80,7 +80,7 @@ Claude 앱 채팅처럼 작업 폴더가 대화를 넘어 남는지 확실하지
 ```bash
 # 방법 1: 마켓플레이스를 통한 설치 (이 리포지토리가 GitHub에 있을 경우)
 /plugin marketplace add SeokRae/fde-harness
-/plugin install fde-harness
+/plugin install fde-harness@fde-harness
 
 # 방법 2: 로컬 설치
 git clone https://github.com/SeokRae/fde-harness ~/.claude/plugins/fde-harness

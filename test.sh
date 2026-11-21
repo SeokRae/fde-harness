@@ -18,16 +18,18 @@ SKILL_MD="$SKILL_DIR/SKILL.md"
 STAGES="init qualify pilot baseline week showcase handoff"
 TEMPLATES="brief qualify pilot baseline week showcase handoff failure-modes"
 
-for f in .claude-plugin/plugin.json .codex-plugin/plugin.json marketplace.json; do
+for f in .claude-plugin/plugin.json .claude-plugin/marketplace.json .codex-plugin/plugin.json marketplace.json; do
   if jq empty "$f" >/dev/null 2>&1; then pass "json_valid ($f)"; else fail "json_valid" "$f 파싱 실패"; fi
 done
 
 V_CLAUDE=$(jq -r '.version' .claude-plugin/plugin.json)
 V_CODEX=$(jq -r '.version' .codex-plugin/plugin.json)
-if [ "$V_CLAUDE" = "$V_CODEX" ] && [ "$V_CLAUDE" != "null" ]; then
+V_MKT_META=$(jq -r '.metadata.version' .claude-plugin/marketplace.json)
+V_MKT_PLUGIN=$(jq -r '.plugins[] | select(.name == "fde-harness") | .version' .claude-plugin/marketplace.json)
+if [ "$V_CLAUDE" != "null" ] && [ "$V_CLAUDE" = "$V_CODEX" ] && [ "$V_CLAUDE" = "$V_MKT_META" ] && [ "$V_CLAUDE" = "$V_MKT_PLUGIN" ]; then
   pass "version_sync ($V_CLAUDE)"
 else
-  fail "version_sync" "claude=$V_CLAUDE codex=$V_CODEX"
+  fail "version_sync" "plugin=$V_CLAUDE codex=$V_CODEX marketplace.metadata=$V_MKT_META marketplace.plugin=$V_MKT_PLUGIN"
 fi
 
 SKILLS=$(find skills -mindepth 2 -maxdepth 2 -name SKILL.md -type f | wc -l | tr -d ' ')
