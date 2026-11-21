@@ -1,7 +1,7 @@
 {
   "name": "fde-harness",
-  "version": "0.6.0",
-  "description": "FDE(Forward Deployed Engineer) 실천 일부를 차용한 AI 코딩 에이전트 하네스 — 현재 등급 FDE-inspired (2-차원 평가). 지원 모드 3/3: 스플릿 🟢, 딥다이브 ✅, 챔피언 🟢. 자기평가 docs/fde-self-evaluation.md 참조.",
+  "version": "1.0.0",
+  "description": "고객사에 Claude를 납품하는 30일 활성화 engagement 하네스. 과제 선별, 파일럿 설계, 기준선, 주간 기록, 쇼케이스, 챔피언 인계를 단계 게이트로 진행합니다.",
   "author": {
     "name": "SeokRae",
     "email": "kslbsh@gmail.com"
@@ -9,9 +9,7 @@
   "homepage": "https://github.com/SeokRae/fde-harness",
   "repository": "https://github.com/SeokRae/fde-harness",
   "license": "MIT",
-  "keywords": ["fde", "spec-driven", "harness", "methodology", "ai-development"],
+  "keywords": ["fde", "forward-deployed-engineer", "engagement", "pilot", "roi", "adoption"],
   "commands": "./commands/",
-  "skills": "./skills/",
-  "hooks": "./hooks/",
-  "mcpServers": "./.mcp.json"
+  "skills": "./skills/"
 }

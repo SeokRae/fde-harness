@@ -1,22 +1,20 @@
 {
   "name": "fde-harness",
-  "version": "0.6.0",
-  "description": "FDE(Forward Deployed Engineer) 실천 일부를 차용한 AI 코딩 에이전트 하네스 — 현재 등급 FDE-inspired (2-차원 평가). 지원 모드 3/3: 스플릿 🟢, 딥다이브 ✅, 챔피언 🟢. 자기평가 docs/fde-self-evaluation.md 참조.",
+  "version": "1.0.0",
+  "description": "고객사에 Claude를 납품하는 30일 활성화 engagement 하네스. 과제 선별, 파일럿 설계, 기준선, 주간 기록, 쇼케이스, 챔피언 인계를 단계 게이트로 진행합니다.",
   "author": "SeokRae",
   "homepage": "https://github.com/SeokRae/fde-harness",
   "repository": "https://github.com/SeokRae/fde-harness",
   "license": "MIT",
-  "keywords": ["fde", "spec-driven", "harness", "methodology"],
+  "keywords": ["fde", "forward-deployed-engineer", "engagement", "pilot", "roi", "adoption"],
   "skills": "./skills/",
-  "hooks": "./hooks/",
-  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "FDE Harness",
-    "shortDescription": "FDE-inspired 3-모드 코딩 하네스 (스플릿·딥다이브·챔피언)",
-    "longDescription": "Echo(Operator)·Delta(Engineer)·AI 의 3-Actor 협력 사이클을 강제하는 spec-driven 하네스입니다. FDE 의 3 모드 모두 거의 완전 지원: 스플릿 (며칠 sprint + daily + demo), 딥다이브 (구조화된 1-3개월 사이클), 챔피언 (graduation + 월간 리뷰). 5가지 forcing function 중 일부 진척. 현재 등급은 FDE-inspired (2-차원 평가) — docs/fde-criteria.md 기준, docs/fde-self-evaluation.md 자기평가 참조.",
+    "shortDescription": "고객 납품 30일 활성화 하네스",
+    "longDescription": "고객사 Claude 도입 engagement를 과제 선별, 파일럿 설계, 기준선, 주간 기록, 쇼케이스, 챔피언 인계 순서로 진행합니다. 단계마다 사용자 승인 게이트가 있고, 실패 유형을 고객을 넘어 누적합니다.",
     "developerName": "SeokRae",
     "category": "workflow",
-    "capabilities": ["spec-driven", "context-management", "ratchet-principle"],
-    "defaultPrompt": "FDE 워크플로우를 시작해줘. specs/ 폴더를 확인하고 다음 작업할 spec을 알려줘."
+    "capabilities": ["stage-gates", "roi-scorecard", "failure-mode-ratchet"],
+    "defaultPrompt": "FDE engagement를 시작해줘. engagements/ 폴더를 확인하고 지금 단계와 다음 할 일을 알려줘."
   }
 }
