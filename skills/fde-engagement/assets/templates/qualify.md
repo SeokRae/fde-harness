@@ -6,7 +6,7 @@ client: {client}
 
 # {client} 과제 선별
 
-판정 규칙은 `docs/methodology.md` §3.2를 따른다.
+판정 규칙은 `references/methodology.md` §3.2를 따른다.
 
 ## 후보 점수표
 

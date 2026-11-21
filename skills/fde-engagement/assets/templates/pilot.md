@@ -6,7 +6,7 @@ client: {client}
 
 # {client} 파일럿 설계
 
-게이트 규칙은 `docs/methodology.md` §3.3을 따른다.
+게이트 규칙은 `references/methodology.md` §3.3을 따른다.
 
 ## 코호트
 
@@ -33,7 +33,7 @@ client: {client}
 
 ## 활성화 환경 체크리스트
 
-`docs/methodology.md` §5의 항목을 고객 저장소마다 점검한다.
+`references/methodology.md` §5의 항목을 고객 저장소마다 점검한다.
 
 - [ ] `CLAUDE.md`: 빌드, 테스트 명령, 코드 규칙, 금지 사항
 - [ ] `CLAUDE.md` 소유자 지정

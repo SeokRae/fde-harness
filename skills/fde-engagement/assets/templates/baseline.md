@@ -6,7 +6,7 @@ client: {client}
 
 # {client} 기준선
 
-게이트 규칙은 `docs/methodology.md` §3.4를 따른다. 측정일이 Day 1 이후인 값은 "사후 추정"으로 표시하고 ROI에서 뺀다.
+게이트 규칙은 `references/methodology.md` §3.4를 따른다. 측정일이 Day 1 이후인 값은 "사후 추정"으로 표시하고 ROI에서 뺀다.
 
 | 지표 | 값 | 단위 | 측정일 | 출처 | 구분 |
 |---|---|---|---|---|---|

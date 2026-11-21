@@ -22,3 +22,6 @@ venv/
 # 로컬 환경
 .env
 .env.local
+
+# 스킬 업로드용 ZIP 빌드 결과
+dist/

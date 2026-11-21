@@ -7,7 +7,7 @@
 - 단계 구조와 기준 항목은 Anthropic Academy 파트너 학습 경로 [Claude Forward Deployed Engineer](https://anthropic-partners.skilljar.com/path/claude-fde)의 두 강의 소개 페이지를 참고했습니다. 강의는 "Delivery Methodology"와 "Driving enterprise adoption of Claude"입니다.
 - 참고한 것은 공개된 강의 소개와 커리큘럼 목차입니다. 강의 본문은 반영하지 않았습니다.
 - 강의 문구는 옮기지 않았습니다. 이 문서의 설명과 판정 규칙은 이 저장소가 정한 것입니다.
-- 이 하네스는 다른 플러그인에 의존하지 않습니다. Claude Code나 Codex만 있으면 동작합니다.
+- 이 하네스는 다른 플러그인에 의존하지 않습니다. Claude Code, Codex, Claude 앱(claude.ai 웹, 데스크톱)에서 같은 스킬 폴더로 동작합니다.
 
 ## 1. 한 장 요약
 
@@ -38,6 +38,8 @@ flowchart LR
 marginal만 있는 과제는 파일럿 대상으로 올리지 않습니다. 사용자가 그래도 진행한다고 결정하면, 그 결정을 `01-qualify.md`에 기록합니다.
 
 ## 3. 단계와 게이트
+
+각 단계의 "커맨드"는 Claude Code의 슬래시 커맨드입니다. 슬래시 커맨드가 없는 환경에서는 "과제 선별 진행해줘"처럼 단계 이름으로 요청하면, 스킬이 같은 절차(`references/procedures/{단계}.md`)를 따릅니다.
 
 모든 단계 파일은 frontmatter에 `status`를 둡니다. 값은 `draft` 또는 `approved`입니다. 다음 단계 커맨드는 앞 단계의 `status: approved`를 확인합니다. 확인하지 못하면 다음 단계 파일을 만들지 않고 이유를 알립니다.
 
