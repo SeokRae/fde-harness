@@ -5,17 +5,6 @@ description: 과제 후보를 네 기준으로 점수 매기고 structural/margi
 
 # 과제 선별
 
-인자: `$ARGUMENTS`, 고객 slug (선택). 비어 있고 `engagements/` 아래 고객이 하나면 그 고객을 쓴다. 여럿이면 사용자에게 묻는다.
+입력: `$ARGUMENTS`
 
-판정 규칙은 플러그인의 `docs/methodology.md` §2와 §3.2를 따른다.
-
-1. 선행 조건: `engagements/{고객}/brief.md`가 있어야 한다. 없으면 `/fde-init`을 안내하고 멈춘다.
-2. `01-qualify.md`가 없으면 `templates/qualify.md`로 만든다. 있으면 그 파일을 이어서 채운다.
-3. 사용자에게 과제 후보를 묻는다. 후보마다 지금 일하는 방식과 바뀔 일의 단위를 묻는다.
-4. 네 기준 점수와 이득 종류를 표에 채운다. 점수의 근거를 후보별 근거 절에 한 줄씩 적는다. 근거가 없는 점수는 사용자에게 다시 묻는다.
-5. §3.2 판정 규칙을 적용해 선정, 탈락, 보류를 표시한다.
-6. 판정 결과를 사용자에게 보여 주고 go 여부를 묻는다.
-7. 사용자가 채팅에서 명시적으로 승인한 경우에만 frontmatter를 `status: approved`로 바꾸고 승인자와 승인일을 적는다.
-8. 다음 단계 `/fde-pilot`을 안내한다.
-
-AI는 스스로 승인하지 않는다. 사용자의 응답이 승인인지 애매하면 다시 묻는다.
+`fde-engagement` 스킬을 불러와 그 스킬 폴더의 `references/procedures/qualify.md` 절차를 그대로 따른다. 위 입력을 절차의 입력으로 넘긴다. 단계 정의와 게이트는 같은 스킬 폴더의 `references/methodology.md`가 기준이다.

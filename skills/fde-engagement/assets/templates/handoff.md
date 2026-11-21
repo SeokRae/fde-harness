@@ -7,7 +7,7 @@ champion: {champion}
 
 # {client} 인계
 
-규칙은 `docs/methodology.md` §3.7을 따른다.
+규칙은 `references/methodology.md` §3.7을 따른다.
 
 ## 페이즈 일정
 

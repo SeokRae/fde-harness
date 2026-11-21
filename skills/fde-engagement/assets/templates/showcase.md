@@ -7,7 +7,7 @@ decision: <!-- 확산 / 연장 / 중단 -->
 
 # {client} 쇼케이스
 
-규칙은 `docs/methodology.md` §3.6을 따른다.
+규칙은 `references/methodology.md` §3.6을 따른다.
 
 ## ROI 스코어카드
 

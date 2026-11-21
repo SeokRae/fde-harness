@@ -1,6 +1,6 @@
 {
   "name": "fde-harness",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "고객사에 Claude를 납품하는 30일 활성화 engagement 하네스. 과제 선별, 파일럿 설계, 기준선, 주간 기록, 쇼케이스, 챔피언 인계를 단계 게이트로 진행합니다.",
   "author": {
     "name": "SeokRae",
